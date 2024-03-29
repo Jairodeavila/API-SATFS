@@ -1,4 +1,4 @@
-GET    http://localhost:3000/centro/all
+GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###

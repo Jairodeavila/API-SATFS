@@ -32,4 +32,5 @@ const Centro = connection.define('Centro', {
   timestamps: false,
 });
 
+
 export default Centro;
