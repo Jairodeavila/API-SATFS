@@ -6,6 +6,10 @@ import dotenv from 'dotenv';
 import ambienteRouter from './routes/ambiente.routes.js';
 import userRouter from './routes/user.routes.js';
 import centroRouter from './routes/centro.routes.js';
+import inventarioRouter from './routes/inventario.routes.js';
+import funcionarioRouter from './routes/funcionario.routes.js';
+import funxinven from './routes/funXinven.routes.js';
+import municipio from './routes/municipio.routes.js';
 dotenv.config();
 
 const app = express();
@@ -18,6 +22,11 @@ app.use(bodyParser.json());
 app.use('/ambiente', ambienteRouter); // Corregido el uso del enrutador de ambiente
 app.use('/user',userRouter)
 app.use('/centro', centroRouter); 
+app.use('/inventario',inventarioRouter);
+app.use('/funcionario',funcionarioRouter);
+app.use('/funxinven',funxinven)
+app.use('/municipio',municipio)
+
 // Manejador de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);

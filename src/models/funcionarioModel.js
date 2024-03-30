@@ -1,51 +1,47 @@
-const connection = require('../config/db.config');
+import { DataTypes } from "sequelize";
+import { connection } from "../database/db.js";
 
-//funcion para obtener todos los funcionarios de la base de datos
+const funcionario = connection.define('Funcionario',{
+  num_doc:{
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  },
 
-const getAllFun = (callback) => {
-  const sql = 'SELECT * FROM funcionario';
-  connection.query(sql, (err, results) => {
-    if (err) {
-      return callback(err);
-    }
-    return callback(null, results);
-  });
-}  
+  nom_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 
-//funcion para crear un funcionario en la base de datos
-
-const createFun = (FunData) => {
-    return new Promise((resolve, reject) => {
-        connection.query('INSERT INTO funcionario SET ?', FunData, (err,res) => {
-           if (err){
-            reject(err);
-           }else{
-            resolve(res);
-           }
-        });
-    });
-}
-
-//funcion para actualizar un funcionario en la base de datos 
-
-const editFun = (FunId, FunData) => {
-    return new Promise((resolve, reject) => {
-      connection.query('UPDATE funcionario SET ? WHERE num_doc = ?', [FunData, FunId], (err, res) => {
-        if (err) {
-          reject(err);
-        } else {
-          if (res.affectedRows === 0) {
-            reject(new Error('Usuario no encontrado'));
-          } else {
-            resolve('Usuario actualizado correctamente');
-          }
-        }
-      });
-    });
+  ape_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  car_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  correo_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  rol_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  contra:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  tip_doc:{
+    type: DataTypes.STRING,
+    allowNull: false,
   }
 
-  module.exports = {
-    getAllFun,
-    createFun,
-    editFun,
-  }
+},{
+  tableName: 'funcionario', 
+  timestamps: false,
+});
+
+export default funcionario;

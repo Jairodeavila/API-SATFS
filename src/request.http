@@ -3,8 +3,25 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:3000/inventario/all
+Content-Type: application/json
+
+###
+GET http://localhost:3000/funcionario/all
+Content-Type: application/json
+
+###
+GET http://localhost:3000/funxinven/all
+Content-Type: application/json
+###
+GET http://localhost:3000/municipio/all
+Content-Type: application/json
+
+###
 POST http://localhost:3000/users/createuser
 Content-Type: application/json
+
+
 
 {
     
