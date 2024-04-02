@@ -16,6 +16,9 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/municipio/all
 Content-Type: application/json
+###
+GET http://localhost:3000/objeto/all
+Content-Type: application/json
 
 ###
 POST http://localhost:3000/users/createuser

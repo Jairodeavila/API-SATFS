@@ -1,16 +1,10 @@
-const objModel = require('../models/objetosModel');
-
-const getAllObjControllers = (req, res) => {
-    objModel.getAllobjects((err, obj) => {
-        if (err) {
-            return res.status(500).json({message: 'Erroe al obtener los objetos'});
-        }
-        res.json(obj);
-    })
+import objetos from "../models/objetosModel.js"; 
+export const GetAllObjetos = async (req, res, next) => {
+    try {
+        const objeto = await objetos.findAll();
+        res.status(200).json(objeto);
+    } catch (error) {
+        next(error);
+    }
 };
 
-
-module.exports = 
-{
-    getAllObjControllers,
-}

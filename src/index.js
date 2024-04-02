@@ -8,8 +8,9 @@ import userRouter from './routes/user.routes.js';
 import centroRouter from './routes/centro.routes.js';
 import inventarioRouter from './routes/inventario.routes.js';
 import funcionarioRouter from './routes/funcionario.routes.js';
-import funxinven from './routes/funXinven.routes.js';
-import municipio from './routes/municipio.routes.js';
+import funxinvenRouter from './routes/funXinven.routes.js';
+import municipioRouter from './routes/municipio.routes.js';
+import objetoRouter from './routes/objetos.routes.js';
 dotenv.config();
 
 const app = express();
@@ -24,8 +25,9 @@ app.use('/user',userRouter)
 app.use('/centro', centroRouter); 
 app.use('/inventario',inventarioRouter);
 app.use('/funcionario',funcionarioRouter);
-app.use('/funxinven',funxinven)
-app.use('/municipio',municipio)
+app.use('/funxinven',funxinvenRouter)
+app.use('/municipio',municipioRouter)
+app.use('/objeto',objetoRouter);
 
 // Manejador de errores
 app.use((err, req, res, next) => {
