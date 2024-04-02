@@ -20,14 +20,14 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 
 // Rutas
-app.use('/ambiente', ambienteRouter); // Corregido el uso del enrutador de ambiente
-app.use('/user',userRouter)
-app.use('/centro', centroRouter); 
-app.use('/inventario',inventarioRouter);
-app.use('/funcionario',funcionarioRouter);
-app.use('/funxinven',funxinvenRouter)
-app.use('/municipio',municipioRouter)
-app.use('/objeto',objetoRouter);
+app.use('/', ambienteRouter); // Corregido el uso del enrutador de ambiente
+app.use('/',userRouter)
+app.use('/', centroRouter); 
+app.use('/',inventarioRouter);
+app.use('/',funcionarioRouter);
+app.use('/',funxinvenRouter)
+app.use('/',municipioRouter)
+app.use('/',objetoRouter);
 
 // Manejador de errores
 app.use((err, req, res, next) => {
