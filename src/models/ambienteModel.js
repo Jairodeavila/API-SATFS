@@ -20,7 +20,7 @@ const Ambiente = connection.define('Ambiente', {
   
 },{
   tableName: 'ambientes',
-  timestamps: true,
+  timestamps: false,
 });
 
 Centro.hasMany(Ambiente, { foreignKey: 'cen_fk' });

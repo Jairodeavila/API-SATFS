@@ -41,7 +41,7 @@ const funcionario = connection.define('Funcionario',{
 
 },{
   tableName: 'funcionario',
-  timestamps: true,
+  timestamps: false,
 });
 // Sincroniza los modelos con la base de datos
 connection.sync()

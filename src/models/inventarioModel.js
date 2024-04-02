@@ -25,7 +25,7 @@ const inventario = connection.define('inventario',{
     }
 },{
     tableName: 'inventario',
-    timestamps: true,
+    timestamps: false,
 });
 
 // Sincroniza los modelos con la base de datos
