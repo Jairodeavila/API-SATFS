@@ -1,10 +1,10 @@
 import  express  from "express";
-import { GetAllObjetos } from "../controllers/objetosController.js";
+import { GetAllObjetos, GetObjetoById} from "../controllers/objetosController.js";
 
 
 const router = express.Router();
 
 
-router.get('/all',GetAllObjetos);
-
+router.get('/objeto/all',GetAllObjetos);
+router.get('/objeto/:id', GetObjetoById);
 export default router;

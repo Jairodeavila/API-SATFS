@@ -1,8 +1,8 @@
 import express from 'express';
-import {GetAllInventario} from '../controllers/inventarioController.js';
+import {GetAllInventario, GetInventarioById} from '../controllers/inventarioController.js';
 
 const router = express.Router();
 
-router.get('/all', GetAllInventario);
-
+router.get('/inventario/all', GetAllInventario);
+router.get('/inventario/:id', GetInventarioById);
 export default router;  

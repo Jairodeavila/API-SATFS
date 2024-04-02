@@ -4,6 +4,6 @@ import { getAllUsers } from '../controllers/userController.js'; // Importa el co
 const router = express.Router();
 
 // Ruta para obtener todos los usuarios
-router.get('/all', getAllUsers);
+router.get('/user/all', getAllUsers);
 
 export default router;

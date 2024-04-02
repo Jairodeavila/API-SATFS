@@ -43,13 +43,13 @@ const funcionario = connection.define('Funcionario',{
   tableName: 'funcionario',
   timestamps: false,
 });
-// Sincroniza los modelos con la base de datos
-// connection.sync()
-//   .then(() => {
-//     console.log('¡Sincronización exitosa!');
-//   })
-//   .catch(err => {
-//     console.error('Error al sincronizar los modelos con la base de datos:', err);
-//   });
+
+connection.sync()
+  .then(() => {
+    console.log('¡Sincronización exitosa!');
+  })
+  .catch(err => {
+    console.error('Error al sincronizar los modelos con la base de datos:', err);
+  });
 
 export default funcionario;
