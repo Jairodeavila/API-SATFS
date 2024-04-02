@@ -22,10 +22,19 @@ const funxinven = connection.define('funxinven', {
 
 }, {
     tableName: 'funxinve',
-    timestamps: false,
+    timestamps: true,
 });
 
 funcionario.belongsToMany(inventario, { through: funxinven, foreignKey: 'id_fun' });
 inventario.belongsToMany(funcionario, { through: funxinven, foreignKey: 'id_inve' });
+
+// Sincroniza los modelos con la base de datos
+connection.sync()
+  .then(() => {
+    console.log('¡Sincronización exitosa!');
+  })
+  .catch(err => {
+    console.error('Error al sincronizar los modelos con la base de datos:', err);
+  });
 
 export default funxinven;

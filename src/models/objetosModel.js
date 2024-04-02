@@ -47,7 +47,16 @@ const objetos = connection.define('Objetos', {
     }
 },{
     tableName: 'objetos',
-    timestamps: false,
+    timestamps: true,
 });
+
+// Sincroniza los modelos con la base de datos
+connection.sync()
+  .then(() => {
+    console.log('¡Sincronización exitosa!');
+  })
+  .catch(err => {
+    console.error('Error al sincronizar los modelos con la base de datos:', err);
+  });
 
 export default objetos;

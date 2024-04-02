@@ -1,7 +1,7 @@
 import User from '../models/userModel.js'; // Importa el modelo User
 
 // Función para obtener todos los usuarios
-const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req, res, next) => {
   try {
     // Busca todos los usuarios en la base de datos
     const users = await User.findAll();
@@ -11,4 +11,3 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-export { getAllUsers };

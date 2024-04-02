@@ -1,7 +1,7 @@
 import Centro from '../models/centrosModel.js'; // Importa el modelo de centros
 
 // Función para obtener todos los centros
-const getAllCentros = async (req, res, next) => {
+export const getAllCentros = async (req, res, next) => {
   try {
     // Busca todos los centros en la base de datos
     const centros = await Centro.findAll();
@@ -14,4 +14,3 @@ const getAllCentros = async (req, res, next) => {
   }
 };
 
-export { getAllCentros };
