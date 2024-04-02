@@ -15,7 +15,7 @@ const municipio = connection.define('Municipo', {
 
 }, {
     tableName: 'municipio',
-    timestamps: true,
+    timestamps: false,
 });
 
 // Sincroniza los modelos con la base de datos

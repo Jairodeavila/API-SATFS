@@ -24,8 +24,8 @@ const Detalles = connection.define('Detalles',{
         allowNull: false,
     },
 },{
-    tableName: 'ambientes',
-    timestamps: true,
+    tableName: 'detalles',
+    timestamps: false,
   });
 
 // Sincroniza los modelos con la base de datos

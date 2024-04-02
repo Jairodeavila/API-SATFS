@@ -19,7 +19,7 @@ const InventariObj = connection.define('InventariObj',
 
 },{
     tableName: 'InventariObj',
-    timestamps: true,
+    timestamps: false,
 });
 
 inventario.belongsToMany(objetos, {through: InventariObj, foreignKey: 'id_obj'});

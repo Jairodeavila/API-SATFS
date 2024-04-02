@@ -30,7 +30,7 @@ import ambientes from './ambienteModel.js';
   }
 },{
   tableName: 'centros',
-  timestamps: true,
+  timestamps: false,
 });
 
 // Sincroniza los modelos con la base de datos

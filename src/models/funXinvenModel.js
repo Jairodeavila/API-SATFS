@@ -22,7 +22,7 @@ const funxinven = connection.define('funxinven', {
 
 }, {
     tableName: 'funxinve',
-    timestamps: true,
+    timestamps: false,
 });
 
 funcionario.belongsToMany(inventario, { through: funxinven, foreignKey: 'id_fun' });

@@ -2,7 +2,10 @@ GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###
+GET    http://localhost:3000/ambiente/:1
+Content-Type: application/json
 
+###
 GET http://localhost:3000/inventario/all
 Content-Type: application/json
 

@@ -47,7 +47,7 @@ const objetos = connection.define('Objetos', {
     }
 },{
     tableName: 'objetos',
-    timestamps: true,
+    timestamps: false,
 });
 
 // Sincroniza los modelos con la base de datos
