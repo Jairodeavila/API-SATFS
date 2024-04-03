@@ -59,7 +59,6 @@ const usuario = connection.define('usuario',{
   tableName: 'usuario',
   timestamps: false,
 });
-
 connection.sync()
   .then(() => {
     console.log('¡Sincronización exitosa!');
