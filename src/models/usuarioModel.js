@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
 import { connection } from "../database/db.js";
-
+import Roles from './rolesModels.js'
 const usuario = connection.define('usuario',{
   num_doc:{
     type: DataTypes.INTEGER,
@@ -59,6 +59,9 @@ const usuario = connection.define('usuario',{
   tableName: 'usuario',
   timestamps: false,
 });
+
+Roles.hasMany(usuario, {foreignKeys: 'id_rol_fk'});
+usuario.belongsTo(Roles,{foreignKeys: 'id_rol_fk'});
 
 connection.sync()
   .then(() => {

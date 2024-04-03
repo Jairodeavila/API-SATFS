@@ -17,7 +17,7 @@ GET http://localhost:3000/inventario/2
 Content-Type: application/json
 
 
-//FUNCIONARIO
+//USUARIO
 ###
 GET http://localhost:3000/usuario/all
 Content-Type: application/json
@@ -49,6 +49,14 @@ GET http://localhost:3000/objeto/all
 Content-Type: application/json
 ###
 GET http://localhost:3000/objeto/1
+Content-Type: application/json
+
+//ROLES
+###
+GET http://localhost:3000/roles/all
+Content-Type: application/json
+###
+GET http://localhost:3000/roles/1
 Content-Type: application/json
 
 ###

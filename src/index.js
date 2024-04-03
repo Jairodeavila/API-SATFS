@@ -10,6 +10,7 @@ import usuarioRouter from './routes/usuario.routes.js';
 import UsuxinvenRouter from './routes/UsuXinven.routes.js';
 import municipioRouter from './routes/municipio.routes.js';
 import objetoRouter from './routes/objetos.routes.js';
+import rolesRouter from './routes/roles.routes.js';
 dotenv.config();
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/',usuarioRouter);
 app.use('/',UsuxinvenRouter)
 app.use('/',municipioRouter)
 app.use('/',objetoRouter);
+app.use('/',rolesRouter);
 
 // Manejador de errores
 app.use((err, req, res, next) => {
