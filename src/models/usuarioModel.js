@@ -60,9 +60,6 @@ const usuario = connection.define('usuario',{
   timestamps: false,
 });
 
-Roles.hasMany(usuario, {foreignKeys: 'id_rol_fk'});
-usuario.belongsTo(Roles,{foreignKeys: 'id_rol_fk'});
-
 connection.sync()
   .then(() => {
     console.log('¡Sincronización exitosa!');
