@@ -4,11 +4,10 @@ import { connection } from './database/db.js';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import ambienteRouter from './routes/ambiente.routes.js';
-import userRouter from './routes/user.routes.js';
 import centroRouter from './routes/centro.routes.js';
 import inventarioRouter from './routes/inventario.routes.js';
-import funcionarioRouter from './routes/funcionario.routes.js';
-import funxinvenRouter from './routes/funXinven.routes.js';
+import usuarioRouter from './routes/usuario.routes.js';
+import UsuxinvenRouter from './routes/UsuXinven.routes.js';
 import municipioRouter from './routes/municipio.routes.js';
 import objetoRouter from './routes/objetos.routes.js';
 dotenv.config();
@@ -21,11 +20,10 @@ app.use(bodyParser.json());
 
 // Rutas
 app.use('/', ambienteRouter); // Corregido el uso del enrutador de ambiente
-app.use('/',userRouter)
 app.use('/', centroRouter); 
 app.use('/',inventarioRouter);
-app.use('/',funcionarioRouter);
-app.use('/',funxinvenRouter)
+app.use('/',usuarioRouter);
+app.use('/',UsuxinvenRouter)
 app.use('/',municipioRouter)
 app.use('/',objetoRouter);
 

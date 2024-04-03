@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import { connection } from "../database/db.js";
 
-const funcionario = connection.define('Funcionario',{
+const usuario = connection.define('usuario',{
   num_doc:{
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -37,10 +37,26 @@ const funcionario = connection.define('Funcionario',{
   tip_doc:{
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  fot_use:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  est_email_func:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  tel_fun:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  id_rol_fk:{
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 
 },{
-  tableName: 'funcionario',
+  tableName: 'usuario',
   timestamps: false,
 });
 
@@ -52,4 +68,4 @@ connection.sync()
     console.error('Error al sincronizar los modelos con la base de datos:', err);
   });
 
-export default funcionario;
+export default usuario;

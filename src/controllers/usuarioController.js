@@ -1,8 +1,9 @@
-import funcionarios from "../models/funcionarioModel.js"; // Corregido el error de sintaxis en la importación del modelo
+import usuarios from "../models/usuarioModel.js"; // Corregido el error de sintaxis en la importación del modelo
 import { response } from "../utils/response.js";
-export const GetAllFuncionario = async (req, res, next) => {
+
+export const GetAllUsuario = async (req, res, next) => {
     try {
-        const data = await funcionarios.findAll();
+        const data = await usuarios.findAll();
         if (data) {
             response(res, 200, 200, data);
         } else {
@@ -14,10 +15,10 @@ export const GetAllFuncionario = async (req, res, next) => {
 };
 
 
-export const GetFuncionarioById = async (req, res) => {
+export const GetUsuarioById = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await funcionarios.findByPk(id);
+        const data = await usuarios.findByPk(id);
 
         if (data) {
             res.status(200).json(data);

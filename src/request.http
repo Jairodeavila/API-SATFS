@@ -19,19 +19,19 @@ Content-Type: application/json
 
 //FUNCIONARIO
 ###
-GET http://localhost:3000/funcionario/all
+GET http://localhost:3000/usuario/all
 Content-Type: application/json
 ###
-GET http://localhost:3000/funcionario/12345
+GET http://localhost:3000/usuario/321
 Content-Type: application/json
 
 
 //FUNXINVEN
 ###
-GET http://localhost:3000/funxinven/all
+GET http://localhost:3000/usuxinven/all
 Content-Type: application/json
 ###
-GET http://localhost:3000/funxinven/12345
+GET http://localhost:3000/usuxinven/1231
 Content-Type: application/json
 
 //MUNICIPIO

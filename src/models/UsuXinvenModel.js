@@ -1,14 +1,14 @@
 import { DataTypes } from 'sequelize';
 import { connection } from '../database/db.js';
-import funcionario from './funcionarioModel.js';
+import usuario from './usuarioModel.js';
 import inventario from './inventarioModel.js';
 
-const funxinven = connection.define('funxinven', {
+const usuxinven = connection.define('usuxinven', {
 
     id_fun: {
         type: DataTypes.INTEGER,
         references: {
-            model: funcionario,
+            model: usuario,
             key: 'num_doc',
         },
     },
@@ -21,12 +21,12 @@ const funxinven = connection.define('funxinven', {
     }
 
 }, {
-    tableName: 'funxinve',
+    tableName: 'usuxinve',
     timestamps: false,
 });
 
-funcionario.belongsToMany(inventario, { through: funxinven, foreignKey: 'id_fun' });
-inventario.belongsToMany(funcionario, { through: funxinven, foreignKey: 'id_inve' });
+usuario.belongsToMany(inventario, { through: usuxinven, foreignKey: 'id_fun' });
+inventario.belongsToMany(usuario, { through: usuxinven, foreignKey: 'id_inve' });
 
 // Sincroniza los modelos con la base de datos
 connection.sync()
@@ -37,4 +37,4 @@ connection.sync()
     console.error('Error al sincronizar los modelos con la base de datos:', err);
   });
 
-export default funxinven;
+export default usuxinven;

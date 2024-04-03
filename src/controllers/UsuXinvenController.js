@@ -1,8 +1,9 @@
-import funxinven from "../models/funXinvenModel.js"; // Corrige la nomenclatura del modelo
+import usuxinven from "../models/UsuXinvenModel.js"; // Corrige la nomenclatura del modelo
 import { response } from "../utils/response.js";
-export const GetAllfunxinven = async (req, res) => {
+
+export const GetAllusuxinven = async (req, res) => {
     try {
-        const data = await funxinven.findAll();
+        const data = await usuxinven.findAll();
         if (data) {
             response(res, 200, 200, data);
         } else {
@@ -13,10 +14,10 @@ export const GetAllfunxinven = async (req, res) => {
     }
 };
 
-export const GetfunxinvenById = async (req, res) => {
+export const GetusuxinvenById = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await funxinven.findByPk(id);
+        const data = await usuxinven.findByPk(id);
 
         if (data) {
             res.status(200).json(data);
