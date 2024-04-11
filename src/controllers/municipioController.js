@@ -27,3 +27,32 @@ export const GetMunicipioById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+
+export const createMunicipio = async (req, res) => {
+    try {
+        const { id_muni, nom_muni, depart_id_fk } = req.body;
+
+    
+        const existingMunicipio = await municipios.findOne({ where: { id_muni: id_muni } });
+
+        if (existingMunicipio) {
+            response(res, 500, 107, "Municipio already exists");
+        } else {
+            // Crear nuevo registro de municipio
+            const newMunicipio = await municipios.create({
+                id_muni: id_muni,
+                nom_muni:nom_muni,
+                depart_id_fk: depart_id_fk,
+            });
+
+            if (newMunicipio) {
+                response(res, 200);
+            } else {
+                response(res, 500, 500, "Error creating");
+            }
+        }
+    } catch (err) {
+        response(res, 500, 500, "Something went wrong");
+        console.log(err);
+    }
+};
