@@ -28,3 +28,32 @@ export const GetCentrosById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+
+export const CreateCentro = async (req, res) => {
+    try{
+        const {cen_id, nom_centro, dir_centro, tel_centro, sub_dir_nom, muni_id} = req.body;
+
+        const newCentro = await Centro.findOne({where: {cen_id: cen_id} });
+        if (existingCentro){
+            response(res, 500, 107, "centro already exists");
+        } else{
+            // Crear nuevo registro de centro
+            const newCentro = await Centro.create({
+                cen_id: cen_id,
+                nom_centro: nom_centro,
+                dir_centro: dir_centro,
+                tel_centro: tel_centro,
+                sub_dir_nom: sub_dir_nom,
+                muni_id: muni_id,
+            });
+            if (newCentro) {
+                response(res, 200);
+            } else {
+                response(res, 500, 500, "Error creating");
+            }
+        }
+    } catch(err){
+        response(res, 500, 500, "Something went wrong");
+        console.log(err);
+    }
+};
