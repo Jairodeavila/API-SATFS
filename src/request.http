@@ -74,18 +74,19 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users/createFun
+POST http://localhost:3000/inventario/create
 Content-Type: application/json
+
+
 {
-    "num_doc": 213,
-    "nom_fun": "mariangel",
-    "ape_fun": "ospino",
-    "car_fun": "gerente",
-    "correo_fun":"mari123@gmail.com", 
-    "rol_fun": "administrador",
-    "contra":  "123",
-    "tip_doc": "Cc"
+    "id_inve": 2 ,
+    "fech_inve": "2020-02-02",
+    "Obs_inve": "ninguna",
+    "Est_inve": "yepes"
+    
 }
+
+
 ###
 
 PUT http://localhost:3000/users/editUser/6

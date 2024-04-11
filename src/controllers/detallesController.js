@@ -1,7 +1,7 @@
 import Detalles from "../models/detallesModel.js";
 import { response } from "../utils/response.js";
 
-export const GetAllAmbientes = async (req, res) => {
+export const GetAllDetalles = async (req, res) => {
     try {
         const data = await Detalles.findAll();
         if (data) {
@@ -14,7 +14,7 @@ export const GetAllAmbientes = async (req, res) => {
     }
 }
 
-export const GetAmbientesById = async (req, res) => {
+export const GetDetallesById = async (req, res) => {
     try {
         const { id } = req.params;
         const data = await Detalles.findByPk(id);

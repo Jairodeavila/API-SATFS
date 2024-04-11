@@ -1,7 +1,7 @@
 import Categoria from "../models/categoriasModel.js";
 import { response } from "../utils/response.js";
 
-export const GetAllAmbientes = async (req, res) => {
+export const GetAllCategorias = async (req, res) => {
     try {
         const data = await Categoria.findAll();
         if (data) {
@@ -14,7 +14,7 @@ export const GetAllAmbientes = async (req, res) => {
     }
 }
 
-export const GetAmbientesById = async (req, res) => {
+export const GetCategoriasById = async (req, res) => {
     try {
         const { id } = req.params;
         const data = await Categoria.findByPk(id);

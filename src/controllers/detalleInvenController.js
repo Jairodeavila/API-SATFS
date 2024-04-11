@@ -1,7 +1,7 @@
 import InventariObj from "../models/detalleInvenModel.js";
 import { response } from "../utils/response.js";
 
-export const GetAllAmbientes = async (req, res) => {
+export const GetAllDetalleInve = async (req, res) => {
     try {
         const data = await InventariObj.findAll();
         if (data) {
@@ -14,7 +14,7 @@ export const GetAllAmbientes = async (req, res) => {
     }
 }
 
-export const GetAmbientesById = async (req, res) => {
+export const GetDetalleInveById = async (req, res) => {
     try {
         const { id } = req.params;
         const data = await InventariObj.findByPk(id);

@@ -1,7 +1,7 @@
 import Centro from "../models/centrosModel.js";
 import { response } from "../utils/response.js";
 
-export const GetAllAmbientes = async (req, res) => {
+export const GetAllCentros = async (req, res) => {
     try {
         const data = await Centro.findAll();
         if (data) {
@@ -14,7 +14,7 @@ export const GetAllAmbientes = async (req, res) => {
     }
 }
 
-export const GetAmbientesById = async (req, res) => {
+export const GetCentrosById = async (req, res) => {
     try {
         const { id } = req.params;
         const data = await Centro.findByPk(id);
