@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllAmbientes, GetAmbientesById } from '../controllers/ambienteController.js';
+import { GetAllAmbientes, GetAmbientesById, createAmbiente } from '../controllers/ambienteController.js';
 
 const router = express.Router();
 
