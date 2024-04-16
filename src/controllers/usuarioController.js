@@ -71,3 +71,44 @@ export const createUsuario = async (req, res) => {
         console.log(err);
     }
 };
+
+// Función para actualizar un registro de usuario cambiando su estado
+export const updateUsuario = async (req, res) => {
+    try {
+        const { num_doc } = req.params;
+        const { nom_fun, ape_fun, car_fun, correo_fun, rol_fun, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
+
+        // Verificar si existe el usuario
+        const data = await usuarios.findByPk(num_doc);
+
+        if (!data) {
+            res.status(404).send("Usuario doesn't exist");
+        } else {
+            // Actualizar el estado del usuario
+            const responses = await usuarios.update(
+                { 
+                    num_doc: num_doc,
+                    nom_fun:nom_fun,
+                    ape_fun: ape_fun,
+                    car_fun: car_fun,
+                    correo_fun: correo_fun,
+                    rol_fun: rol_fun,
+                    tip_doc: tip_doc,
+                    fot_use: fot_use,
+                    est_email_func: est_email_func,
+                    tel_fun: tel_fun,
+                    id_rol_fk: id_rol_fk },
+                { where: { num_doc: num_doc } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

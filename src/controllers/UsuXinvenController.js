@@ -58,3 +58,33 @@ export const createUsuXinve = async (req, res) => {
         console.log(err);
     }
 };
+
+// Función para actualizar un registro de usuxinven cambiando su estado
+export const updateUsuXinven = async (req, res) => {
+    try {
+        const { id_fun } = req.params;
+        const { id_inve } = req.body;
+
+        // Verificar si existe el usuxinven
+        const data = await usuxinven.findByPk(id_fun);
+
+        if (!data) {
+            res.status(404).send("Usuxinven doesn't exist");
+        } else {
+            // Actualizar el estado del usuxinven
+            const responses = await usuxinven.update(
+                { id_inve:id_inve },
+                { where: { id_fun: id_fun } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

@@ -61,31 +61,35 @@ export const createInventario = async (req, res) => {
 
 
 // Función para actualizar un registro de inventario cambiando su estado
-export const updateInventarioEstado = async (req, res) => {
+export const updateInventario = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { Est_inve } = req.body;
+        const { id_inve } = req.params;
+        const { fech_inve, Obs_inve, Est_inve } = req.body;
 
         // Verificar si existe el inventario
-        const inventario = await Inventario.findByPk(id);
+        const data = await inventario.findByPk(id_inve);
 
-        if (!inventario) {
-            response(res, 404, 404, "Inventario doesn't exist");
+        if (!data) {
+            res.status(404).send("Inventario doesn't exist");
         } else {
             // Actualizar el estado del inventario
-            const response = await inventario.update({ Est_inve: Est_inve });
+            const responses = await inventario.update(
+                { fech_inve: fech_inve, Obs_inve: Obs_inve, Est_inve: Est_inve },
+                { where: { id_inve: id_inve } }
+            );
 
-            if (response) {
+            if (responses) {
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error updating");
+                res.status(500).send("Error updating");
             }
         }
     } catch (err) {
+        console.error(err);
         response(res, 500, 500, "Something went wrong");
-        console.log(err);
     }
 };
+
 
 // Función para eliminar un registro de inventario cambiando su estado
 export const deleteInventarioEstado = async (req, res) => {

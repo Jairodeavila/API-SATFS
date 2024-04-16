@@ -56,3 +56,32 @@ export const createMunicipio = async (req, res) => {
         console.log(err);
     }
 };
+// Función para actualizar un registro de municipio cambiando su estado
+export const updateMunicipio = async (req, res) => {
+    try {
+        const { id_muni } = req.params;
+        const { nom_muni } = req.body;
+
+        // Verificar si existe el municipio
+        const data = await municipios.findByPk(id_muni);
+
+        if (!data) {
+            res.status(404).send("Municipio doesn't exist");
+        } else {
+            // Actualizar el estado del municipio
+            const responses = await municipios.update(
+                { nom_muni: nom_muni },
+                { where: { id_muni: id_muni } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

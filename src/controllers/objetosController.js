@@ -59,3 +59,33 @@ export const createObjeto = async (req, res) => {
         console.log(err);
     }
 };
+
+// Función para actualizar un registro de objeto cambiando su estado
+export const updateObjeto = async (req, res) => {
+    try {
+        const { id_obj } = req.params;
+        const { id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj } = req.body;
+
+        // Verificar si existe el objeto
+        const data = await objetos.findByPk(id_obj);
+
+        if (!data) {
+            res.status(404).send("Objeto doesn't exist");
+        } else {
+            // Actualizar el estado del objetos
+            const responses = await objetos.update(
+                { id_cate: id_cate, ser_obj: ser_obj, id_amb: id_amb, fech_adqui:fech_adqui, est_obj:est_obj, obser_obj:obser_obj, tip_obj:tip_obj, marc_obj:marc_obj, val_obj:val_obj},
+                { where: { id_obj: id_obj } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};
