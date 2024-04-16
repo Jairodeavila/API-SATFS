@@ -9,3 +9,4 @@ router.get('/ambiente/all', GetAllAmbientes); // Cambiado a '/ambientes'
 router.get('/ambiente/:id', GetAmbientesById); // Cambiado a '/ambientes'
 
 export default router;
+ 
