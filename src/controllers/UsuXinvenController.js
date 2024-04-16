@@ -28,3 +28,33 @@ export const GetusuxinvenById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+
+
+export const createUsuXinve = async (req, res) => {
+    try {
+        const { id_fun, id_inve } = req.body;
+
+    
+        const existingUsuXinve = await usuxinven.findOne({ where: { id_fun: id_fun } });
+
+        if (existingUsuXinve) {
+            response(res, 500, 107, "UsuXinve already exists");
+        } else {
+            // Crear nuevo registro de usuxinven
+            const newUsuXinve = await usuxinven.create({
+                id_fun: id_fun,
+                id_inve:id_inve,
+                
+            });
+
+            if (newUsuXinve) {
+                response(res, 200);
+            } else {
+                response(res, 500, 500, "Error creating");
+            }
+        }
+    } catch (err) {
+        response(res, 500, 500, "Something went wrong");
+        console.log(err);
+    }
+};

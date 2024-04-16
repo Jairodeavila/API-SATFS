@@ -4,7 +4,7 @@ GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###
-GET    http://localhost:3000/ambiente/1
+GET    http://localhost:3000/token/all
 Content-Type: application/json
 
 
@@ -15,24 +15,70 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/inventario/2
 Content-Type: application/json
+###
+POST http://localhost:3000/inventario/create
+Content-Type: application/json
+{
+    "id_inve": 2 ,
+    "fech_inve": "2020-02-02",
+    "Obs_inve": "ninguna",
+    "Est_inve": "yepes"
+    
+}
+
 
 
 //USUARIO
 ###
 GET http://localhost:3000/usuario/all
 Content-Type: application/json
+
 ###
-GET http://localhost:3000/usuario/321
+GET http://localhost:3000/usuario/178978
 Content-Type: application/json
 
+###
+POST http://localhost:3000/usuario/create
+Content-Type: application/json
 
-//FUNXINVEN
+{
+    "num_doc":178978 ,
+    "nom_fun":"tati",
+    "ape_fun":"manuel",
+    "car_fun": "aprendiz",
+    "correo_fun":"jandy@gmail.com",
+    "rol_fun":"admin",
+    "password":"123",
+    "tip_doc":"cc ",
+    "fot_use":"prueba",
+    "est_email_func":"1",
+    "tel_fun":"123",
+    "id_rol_fk": 9
+}
+
+//USUXINVE
 ###
 GET http://localhost:3000/usuxinven/all
 Content-Type: application/json
 ###
-GET http://localhost:3000/usuxinven/1231
+GET http://localhost:3000/usuxinven/321
 Content-Type: application/json
+
+###
+POST http://localhost:3000/usuxinven/create
+Content-Type: application/json
+
+[
+    {
+        "id_fun": 1,
+        "id_inve": 2
+    }
+    
+]
+    
+
+
+
 
 //MUNICIPIO
 ###
@@ -41,7 +87,15 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/municipio/1
 Content-Type: application/json
+###
+POST http://localhost:3000/municipio/create
+Content-Type: application/json
 
+{
+    "id_muni": 1,
+    "nom_muni":"prueba",
+    "depart_id_fk": 123
+}
 
 //OBJETOS
 ###
@@ -50,7 +104,22 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/objeto/1
 Content-Type: application/json
+###
+POST http://localhost:3000/objeto/create
+Content-Type: application/json
 
+{
+    "id_obj": 2,
+    "id_cate":2,
+    "ser_obj":"prueba",
+    "id_amb": 1,
+    "fech_adqui":"2024-04-12T10:03:23.000Z",
+    "est_obj":"est_obj",
+    "obser_obj":"prueba",
+    "tip_obj":"prueba",
+    "marc_obj":"prueba",
+    "val_obj":123
+}
 //ROLES
 ###
 GET http://localhost:3000/roles/all
@@ -60,31 +129,31 @@ GET http://localhost:3000/roles/1
 Content-Type: application/json
 
 ###
+POST http://localhost:3000/roles/create
+Content-Type: application/json
+
+{
+    "id_Rol": 2,
+    "nom_Rol":"admin",
+    "createdAt": "2024-04-07 10:05:51",
+    "updatedAt": "2024-04-16 10:05:53"
+}
+
+
+###
 POST http://localhost:3000/users/createuser
 Content-Type: application/json
 
 
 
 {
-    
     "username": "mariana",
     "password": "123",
     "apellido": "yepes",
     "telefono": "123456789"
 }
 
-###
-POST http://localhost:3000/inventario/create
-Content-Type: application/json
 
-
-{
-    "id_inve": 2 ,
-    "fech_inve": "2020-02-02",
-    "Obs_inve": "ninguna",
-    "Est_inve": "yepes"
-    
-}
 
 
 ###

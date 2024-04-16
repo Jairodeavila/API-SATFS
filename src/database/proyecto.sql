@@ -27,9 +27,12 @@ CREATE TABLE `ambientes` (
   PRIMARY KEY (`amb_id`),
   KEY `Centro_FK` (`cen_fk`),
   CONSTRAINT `ambientes_ibfk_1` FOREIGN KEY (`cen_fk`) REFERENCES `centros` (`cen_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `ambientes` */
+
+insert  into `ambientes`(`amb_id`,`nom_amb`,`cen_fk`) values 
+(1,'adsp',1);
 
 /*Table structure for table `categoria` */
 
@@ -39,9 +42,13 @@ CREATE TABLE `categoria` (
   `id_cate` int(11) NOT NULL AUTO_INCREMENT,
   `nom_cate` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_cate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `categoria` */
+
+insert  into `categoria`(`id_cate`,`nom_cate`) values 
+(1,'prueba'),
+(2,'prueba2');
 
 /*Table structure for table `centros` */
 
@@ -56,9 +63,12 @@ CREATE TABLE `centros` (
   `muni_id` char(20) DEFAULT NULL,
   PRIMARY KEY (`cen_id`),
   KEY `fk_muni123` (`muni_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `centros` */
+
+insert  into `centros`(`cen_id`,`nom_centro`,`dir_centro`,`tel_centro`,`sub_dir_nom`,`muni_id`) values 
+(1,'prueba ','123','123','123','1');
 
 /*Table structure for table `departamento` */
 
@@ -73,6 +83,9 @@ CREATE TABLE `departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `departamento` */
+
+insert  into `departamento`(`id_depart`,`nom_depart`,`pais_id_fk`) values 
+('123','123','123');
 
 /*Table structure for table `detalleinve` */
 
@@ -156,7 +169,8 @@ CREATE TABLE `inventario` (
 /*Data for the table `inventario` */
 
 insert  into `inventario`(`id_inve`,`fech_inve`,`Obs_inve`,`Est_inve`) values 
-(1,'2024-04-03 08:43:00','ninguna','activo');
+(1,'2024-04-03 08:43:00','ninguna','activo'),
+(2,'2020-02-02 00:00:00','ninguna','yepes');
 
 /*Table structure for table `municipio` */
 
@@ -173,6 +187,9 @@ CREATE TABLE `municipio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `municipio` */
+
+insert  into `municipio`(`id_muni`,`nom_muni`,`depart_id_fk`) values 
+('1','prueba',NULL);
 
 /*Table structure for table `objetos` */
 
@@ -194,9 +211,13 @@ CREATE TABLE `objetos` (
   KEY `amb_id` (`id_amb`),
   CONSTRAINT `objetos_ibfk_4` FOREIGN KEY (`id_amb`) REFERENCES `ambientes` (`amb_id`),
   CONSTRAINT `objetos_ibfk_5` FOREIGN KEY (`id_cate`) REFERENCES `categoria` (`id_cate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `objetos` */
+
+insert  into `objetos`(`id_obj`,`id_cate`,`ser_obj`,`id_amb`,`fech_adqui`,`est_obj`,`obser_obj`,`tip_obj`,`marc_obj`,`val_obj`) values 
+(1,1,'123',1,'2024-04-11 10:03:23','prueba','prueba','prueba','prueba',123),
+(2,2,'prueba',1,'2024-04-12 10:03:23','est_obj','prueba','prueba','prueba',123);
 
 /*Table structure for table `roles` */
 
@@ -213,6 +234,8 @@ CREATE TABLE `roles` (
 /*Data for the table `roles` */
 
 insert  into `roles`(`id_Rol`,`nom_Rol`,`createdAt`,`updatedAt`) values 
+(1,'admin','2024-04-07 10:05:51','2024-04-16 10:05:53'),
+(2,'admin','2024-04-07 15:05:51','2024-04-16 15:05:53'),
 (9,'admin','2024-04-03 08:38:56','2024-04-03 08:38:59');
 
 /*Table structure for table `tokens` */
@@ -259,6 +282,8 @@ CREATE TABLE `usuario` (
 /*Data for the table `usuario` */
 
 insert  into `usuario`(`num_doc`,`nom_fun`,`ape_fun`,`car_fun`,`correo_fun`,`rol_fun`,`contra`,`tip_doc`,`fot_use`,`est_email_func`,`tel_fun`,`id_rol_fk`) values 
+(1,'jainer','manuel','aprendiz','jainer@gmail.com','admin','123','Conn','prueba',1,'123',9),
+(2,'jandy','manuel','aprendiz','jandy@gmail.com','admin','123','cc: ','prueba',1,'123',9),
 (321,'keine','manue','estudiante','keinemanue@gmail.maricon','normas','1234','ti','fmdksfs',1,'23334',9),
 (1231,'jairo','de avila ','admin','jairo@gmail.com','admin','1234','cc','fdgfs',0,'34234',9);
 
@@ -295,6 +320,10 @@ CREATE TABLE `usuxinven` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `usuxinven` */
+
+insert  into `usuxinven`(`id_fun`,`id_inve`) values 
+(102932323,1),
+(102932323,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

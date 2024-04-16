@@ -3,6 +3,7 @@ import express from 'express';
 import { connection } from './database/db.js';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import tokenRouter from './routes/token.routes.js';
 import ambienteRouter from './routes/ambiente.routes.js';
 import centroRouter from './routes/centro.routes.js';
 import inventarioRouter from './routes/inventario.routes.js';
@@ -23,11 +24,13 @@ app.use(bodyParser.json());
 app.use('/', ambienteRouter); // Corregido el uso del enrutador de ambiente
 app.use('/', centroRouter); 
 app.use('/',inventarioRouter);
+app.use('/',tokenRouter);
 app.use('/',usuarioRouter);
 app.use('/',UsuxinvenRouter)
 app.use('/',municipioRouter)
 app.use('/',objetoRouter);
 app.use('/',rolesRouter);
+
 
 // Manejador de errores
 app.use((err, req, res, next) => {
