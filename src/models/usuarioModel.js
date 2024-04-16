@@ -31,7 +31,7 @@ const usuario = connection.define('usuario',{
     type: DataTypes.STRING,
     allowNull: false,
   },
-  contra:{
+  password:{
     type: DataTypes.STRING,
     allowNull: false,
   },

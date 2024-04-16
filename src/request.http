@@ -4,7 +4,7 @@ GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###
-GET    http://localhost:3000/ambiente/1
+GET    http://localhost:3000/token/all
 Content-Type: application/json
 
 
@@ -32,22 +32,24 @@ Content-Type: application/json
 ###
 GET http://localhost:3000/usuario/all
 Content-Type: application/json
+
 ###
-GET http://localhost:3000/usuario/321
+GET http://localhost:3000/usuario/178978
 Content-Type: application/json
+
 ###
 POST http://localhost:3000/usuario/create
 Content-Type: application/json
 
 {
-    "num_doc":2 ,
-    "nom_fun":"jandy",
+    "num_doc":178978 ,
+    "nom_fun":"tati",
     "ape_fun":"manuel",
     "car_fun": "aprendiz",
     "correo_fun":"jandy@gmail.com",
     "rol_fun":"admin",
-    "contra":"123",
-    "tip_doc":"cc: ",
+    "password":"123",
+    "tip_doc":"cc ",
     "fot_use":"prueba",
     "est_email_func":"1",
     "tel_fun":"123",
