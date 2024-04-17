@@ -73,55 +73,6 @@ export const createUsuario = async (req, res) => {
     }
 };
 
-
-export const UserLoggingin = async (req, res) => {
-    const { correo_fun, password } = req.body;
-
-    try {
-        let user = await usuarios.findOne({ where: { correo_fun: correo_fun } });
-
-        if (user) {
-            user = user.dataValues;
-
-            // Verificar la contraseña
-            const passEncripted = await bcrypt.compare(password, user.password); // Definir passEncripted aquí
-
-            if (passEncripted) {
-                const token = generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
-
-                await Token.create({
-                    userId: user.num_doc,
-                    token: token
-                });
-
-                // Devolver el token en la respuesta
-                return res.status(200).json({ token: token });
-            } else {
-                // Manejar la contraseña incorrecta
-                return res.status(401).json({ error: "Contraseña incorrecta" });
-            }
-        } else {
-            // Manejar el usuario no encontrado
-            return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-    } catch (error) {
-        // Manejar errores de la base de datos u otros errores
-        console.error("Error al iniciar sesión:", error);
-        return res.status(500).json({ error: "Error interno del servidor" });
-    }
-};
-
-export const generateAuthToken = async (correo_fun) => { 
-    const secretKey = process.env.SECRETWORD; 
-
-    const payload = {
-        correo_fun: correo_fun
-    }; 
-
-    const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
-    return token;
-};
-
 // Función para actualizar un registro de usuario cambiando su estado
 export const updateUsuario = async (req, res) => {
     try {
@@ -161,5 +112,56 @@ export const updateUsuario = async (req, res) => {
         console.error(err);
         response(res, 500, 500, "Something went wrong");
     }
+};
+
+
+
+
+export const UserLoggingin = async (req, res) => {
+    const { correo_fun, password } = req.body;
+
+    try {
+        let user = await usuarios.findOne({ where: { correo_fun: correo_fun } });
+
+        if (user) {
+            user = user.dataValues;
+
+            // Verificar la contraseña
+            const passEncripted = await bcrypt.compare(password, user.password); 
+
+            if (passEncripted) {
+                const token = generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
+
+                await Token.create({
+                    userId: user.num_doc,
+                    token: token
+                });
+
+                // Devolver el token en la respuesta
+                return res.status(200).json({ token: token });
+            } else {
+                // Manejar la contraseña incorrecta
+                return res.status(401).json({ error: "Contraseña incorrecta" });
+            }
+        } else {
+            // Manejar el usuario no encontrado
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+    } catch (error) {
+        // Manejar errores de la base de datos u otros errores
+        console.error("Error al iniciar sesión:", error);
+        return res.status(500).json({ error: "Error interno del servidor" });
+    }
+};
+
+export const generateAuthToken = async (correo_fun) => { 
+    const secretKey = process.env.SECRETWORD; 
+
+    const payload = {
+        correo_fun: correo_fun
+    }; 
+
+    const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+    return token;
 };
 
