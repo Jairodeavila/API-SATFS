@@ -28,3 +28,26 @@ export const GetCategoriasById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+export const createCategoria = async (req, res) => {
+    try {
+        const { id_cate,nom_cate } = req.body;
+
+        const existingCategoria = await Categoria.findOne({where: {id_cate: id_cate}});
+        if (existingCategoria) {
+            response(res, 500, 107, "categoria already exists");
+        } else {
+            const newCategoria = existingCategoria = await Categoria.create({
+                id_cate: id_cate,
+                nom_cate: nom_cate
+            });
+            if (newCategoria){
+                response(res, 200);
+            } else {
+                response(res, 500, 500, "Error creating");
+            }
+        }
+    } catch (err) {
+        response(res,500,500,"Something went wrong ");
+        console.log(err);
+    }
+}

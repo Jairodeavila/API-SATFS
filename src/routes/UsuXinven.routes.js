@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllusuxinven, GetusuxinvenById, createUsuXinve } from '../controllers/UsuXinvenController.js';
+import { GetAllusuxinven, GetusuxinvenById, createUsuXinve, updateUsuXinven } from '../controllers/UsuXinvenController.js';
 
 const router = express.Router();
 
@@ -7,4 +7,5 @@ const router = express.Router();
 router.get('/usuxinven/all', GetAllusuxinven); // Cambiado a '/ambientes'
 router.get('/usuxinven/:id', GetusuxinvenById); // Cambiendo
 router.post('/usuxinven/create', createUsuXinve); 
+router.put('/usuxinven/:id_fun/update', updateUsuXinven); 
 export default router;

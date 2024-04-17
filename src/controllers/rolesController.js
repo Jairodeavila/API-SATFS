@@ -58,3 +58,33 @@ export const createRoles = async (req, res) => {
         console.log(err);
     }
 };
+
+// Función para actualizar un registro de roles cambiando su estado
+export const updateRoles = async (req, res) => {
+    try {
+        const { id_Rol } = req.params;
+        const { nom_Rol, createdAt, updatedAt } = req.body;
+
+        // Verificar si existe el roles
+        const data = await roles.findByPk(id_Rol);
+
+        if (!data) {
+            res.status(404).send("Roles doesn't exist");
+        } else {
+            // Actualizar el estado del roles
+            const responses = await roles.update(
+                { nom_Rol: nom_Rol, createdAt: createdAt, updatedAt: updatedAt },
+                { where: { id_Rol: id_Rol } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

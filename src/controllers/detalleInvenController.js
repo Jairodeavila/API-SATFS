@@ -28,3 +28,28 @@ export const GetDetalleInveById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+
+export const createDetalleInve = async (req, res) => {
+    try{
+        const{id_inv, id_obj}=req.body;
+
+        const existingDetalleInve = await InventariObj.findOne({where:{id_inv:id_inv}});
+        if (existingDetalleInve) {
+            response(res, 500, 107, "DetalleInventario already exists");
+        } else {
+            // Crear nuevo registro de inventario
+            const newDetalleInve = await InventariObj.create({
+                id_inv: id_inv,
+                id_obj: id_obj
+            });
+            if (newDetalleInve) {
+                response(res, 200, 200);
+            } else {
+                response(res, 500, 500,"Error creating");
+            }
+        }
+    } catch (err){
+        response(res, 500, 500, "Something went wrong");
+        console.log(err);
+    }
+};
