@@ -1,5 +1,7 @@
 import usuarios from "../models/usuarioModel.js"; // Corregido el error de sintaxis en la importación del modelo
 import { response } from "../utils/response.js";
+import Token from "../models/tokens.js";
+import dotenv from 'dotenv';
 import bcrypt from "bcrypt";
 
 export const GetAllUsuario = async (req, res, next) => {
@@ -37,8 +39,7 @@ export const createUsuario = async (req, res) => {
         
         const { num_doc, nom_fun, ape_fun, car_fun, correo_fun, rol_fun, password, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
         const existingUsuario = await usuarios.findOne({ where: { num_doc: num_doc } });
-        const passEncripted = await bcrypt.hash(password, 10);
-
+        
         if (existingUsuario) {
             response(res, 500, 107, "Usuario already exists");
         } else {
@@ -70,4 +71,52 @@ export const createUsuario = async (req, res) => {
         response(res, 500, 500, "Something went wrong");
         console.log(err);
     }
+};
+
+export const UserLoggingin = async (req, res) => {
+    const { correo_fun, password } = req.body;
+
+    try {
+        let user = await usuarios.findOne({ where: { correo_fun: correo_fun } });
+
+        if (user) {
+            user = user.dataValues;
+
+            // Verificar la contraseña
+            const passEncripted = await bcrypt.compare(password, user.password); // Definir passEncripted aquí
+
+            if (passEncripted) {
+                const token = generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
+
+                await Token.create({
+                    userId: user.num_doc,
+                    token: token
+                });
+
+                // Devolver el token en la respuesta
+                return res.status(200).json({ token: token });
+            } else {
+                // Manejar la contraseña incorrecta
+                return res.status(401).json({ error: "Contraseña incorrecta" });
+            }
+        } else {
+            // Manejar el usuario no encontrado
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+    } catch (error) {
+        // Manejar errores de la base de datos u otros errores
+        console.error("Error al iniciar sesión:", error);
+        return res.status(500).json({ error: "Error interno del servidor" });
+    }
+};
+
+export const generateAuthToken = async (correo_fun) => { 
+    const secretKey = process.env.SECRETWORD; 
+
+    const payload = {
+        correo_fun: correo_fun
+    }; 
+
+    const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });
+    return token;
 };

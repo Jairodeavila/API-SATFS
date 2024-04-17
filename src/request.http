@@ -42,13 +42,13 @@ POST http://localhost:3000/usuario/create
 Content-Type: application/json
 
 {
-    "num_doc":178978 ,
-    "nom_fun":"tati",
+    "num_doc":1234 ,
+    "nom_fun":"juan",
     "ape_fun":"manuel",
     "car_fun": "aprendiz",
-    "correo_fun":"jandy@gmail.com",
+    "correo_fun":"keiner@gmail.com",
     "rol_fun":"admin",
-    "password":"123",
+    "password":"12345678",
     "tip_doc":"cc ",
     "fot_use":"prueba",
     "est_email_func":"1",
@@ -178,3 +178,13 @@ Content-Type: application/json
 
 POST http://localhost:3000/users/allobj
 Content-Type: application/json
+
+
+###
+POST http://localhost:3000/usuario/login
+Content-Type: application/json
+
+{
+    "correo_fun":"jairo@gmail.com",
+    "password":"123"
+}
