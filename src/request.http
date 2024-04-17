@@ -44,6 +44,8 @@ Content-Type: application/json
 GET http://localhost:3000/usuario/all
 Content-Type: application/json
 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW9fZnVuIjoiYW5kcmVzQGdtYWlsLmNvbSIsImlhdCI6MTcxMzM2NTIyNywiZXhwIjoxNzEzNDUxNjI3fQ.GeUgJzQGUXckfAc7Gijehor5zzZ5EfRoyITInjTIrmc
+
 ###
 GET http://localhost:3000/usuario/178978
 Content-Type: application/json
@@ -54,21 +56,19 @@ Content-Type: application/json
 
 {
 
-    "num_doc":1234 ,
+    "num_doc":123456 ,
     "nom_fun":"juan",
-    "num_doc":2 ,
     "nom_fun":"tati",
-
     "ape_fun":"manuel",
     "car_fun": "aprendiz",
-    "correo_fun":"keiner@gmail.com",
+    "correo_fun":"andres@gmail.com",
     "rol_fun":"admin",
     "password":"12345678",
     "tip_doc":"cc ",
     "fot_use":"prueba",
     "est_email_func":"1",
     "tel_fun":"123",
-    "id_rol_fk": 1
+    "id_rol_fk": "9"
 }
 
 ###
@@ -257,6 +257,6 @@ POST http://localhost:3000/usuario/login
 Content-Type: application/json
 
 {
-    "correo_fun":"jairo@gmail.com",
-    "password":"123"
+    "correo_fun":"andres@gmail.com",
+    "password":"12345678"
 }

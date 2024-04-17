@@ -1,22 +1,28 @@
+import jsonwebtoken from "jsonwebtoken";
 import usuarios from "../models/usuarioModel.js"; // Corregido el error de sintaxis en la importación del modelo
 import { response } from "../utils/response.js";
 import Token from "../models/tokens.js";
-import dotenv from 'dotenv';
+import  'dotenv/config.js';
 import bcrypt from "bcrypt";
 
+const jwt = jsonwebtoken;
+
 export const GetAllUsuario = async (req, res, next) => {
-    try {
-        const data = await usuarios.findAll({
-            attributes: { exclude: ['password'] }
-        });
-        if (data) {
-            response(res, 200, 200, data);
-        } else {
-            response(res, 404, 404);
+    jwt.verify(req.token, process.env.SECREDWORD, async (err, data) => {
+        try {
+            const data = await usuarios.findAll({
+                attributes: { exclude: ['password'] }
+            });
+            if (data) {
+                response(res, 200, 200, data);
+            } else {
+                response(res, 404, 404);
+            }
+        } catch (err) {
+            response(res, 500, 'something went wrong');
         }
-    } catch (err) {
-        response(res, 500, 'something went wrong');
-    }
+    })
+   
 };
 
 export const GetUsuarioById = async (req, res) => {
@@ -39,7 +45,7 @@ export const createUsuario = async (req, res) => {
         
         const { num_doc, nom_fun, ape_fun, car_fun, correo_fun, rol_fun, password, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
         const existingUsuario = await usuarios.findOne({ where: { num_doc: num_doc } });
-        
+        const passEncripted = await bcrypt.hash(password, 5); 
         if (existingUsuario) {
             response(res, 500, 107, "Usuario already exists");
         } else {
@@ -125,15 +131,20 @@ export const UserLoggingin = async (req, res) => {
 
         if (user) {
             user = user.dataValues;
-
+    
             // Verificar la contraseña
             const passEncripted = await bcrypt.compare(password, user.password); 
 
             if (passEncripted) {
-                const token = generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
-
+                const token = await generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
+                console.log(token);
+                
+                 const decode =  jwt.decode(token,process.env.SECREDWORD)
+                console.log(decode);
                 await Token.create({
-                    userId: user.num_doc,
+                    fec_caducidad:decode.exp,
+                    user_id_fk:user.num_doc,
+                    tipo_token:1,
                     token: token
                 });
 
@@ -155,10 +166,11 @@ export const UserLoggingin = async (req, res) => {
 };
 
 export const generateAuthToken = async (correo_fun) => { 
-    const secretKey = process.env.SECRETWORD; 
-
+    const secretKey = process.env.SECREDWORD; 
+    console.log(secretKey); 
     const payload = {
         correo_fun: correo_fun
+        
     }; 
 
     const token = jwt.sign(payload, secretKey, { expiresIn: '24h' });

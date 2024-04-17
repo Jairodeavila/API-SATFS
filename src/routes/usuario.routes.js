@@ -1,11 +1,11 @@
 import express from 'express';
-
+import {Tokenverificacion} from '../middlewares/tokenmiddleware.js';
 import { GetUsuarioById, GetAllUsuario, createUsuario, UserLoggingin, updateUsuario} from '../controllers/usuarioController.js';
 
 
 const router = express.Router();
 
-router.get('/usuario/all', GetAllUsuario);
+router.get('/usuario/all', Tokenverificacion, GetAllUsuario);
 
 router.get('/usuario/:id', GetUsuarioById);
 

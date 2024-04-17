@@ -1,36 +1,56 @@
-import jsonwebtoken from "jsonwebtoken";
-import { response } from "../utils/response.js";
+import jsonwebtoken from 'jsonwebtoken';
+import {response} from '../utils/response.js'
 const jwt = jsonwebtoken;
 
 export const Tokenverificacion = async (req, res, next) => {
     try {
-        let barearHeader = req.headers ["Authorization"];
+        let bearerHeader = req.headers['authorization'];
         let token = req.params.token;
+        
         if (token) {
-            const barearToken = token;
-            const decodetoken = jwt.decode(barearToken,{complete: true})
-            const fechaAct = Math.floor(Date.now() / 1000);
-            if (fechaAct > decodetoken.payload.exp){
-                response(res,400,105, 'token caducado');
+
+            const bearerToken = token;
+
+            const decodetoken = jwt.decode(bearerToken, { complete: true })
+
+            const fechaActual = Math.floor(Date.now() / 1000);
+
+            if (fechaActual > decodetoken.payload.exp) {
+
+                response(res,400,105,"Expired token");
             }else{
-                req.token = barearToken;
+
+                req.token = bearerToken;
                 next();
             }
 
-        } else if (typeof barearHeader !== "undefined"){
-            const barearToken = jwt.decode(barearHeader,{complete:true});
-            const fechaAct = Math.floor(Date.now()/1000);
-            if (fechaAct > decodetoken.payload.exp){
-                response(res,400,105, "token expirado")
+           
+
+        } else if (typeof bearerHeader !== "undefined") {
+
+            
+            const bearerToken = bearerHeader.split(' ')[1];
+
+
+            const decodetoken = jwt.decode(bearerToken, { complete: true })
+
+            const fechaActual = Math.floor(Date.now() / 1000);
+
+            if (fechaActual > decodetoken.payload.exp) {
+                response(res,400,105,"Expired token");
             }else{
-                req.token = barearToken;
+                req.token = bearerToken;
                 next();
             }
-        }else {
-            response(res,400,101, "token invalido");
+
+           
+
+        } else {
+            
+            response(res,400,101,"invalid token");
         }
-    }catch(error){
-        response(res,400,101, " token invalido")
+    } catch (error) {
+
+        response(res,400,101,"invalid token");
     }
 }
-        
