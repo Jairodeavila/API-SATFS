@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import tokenRouter from './routes/token.routes.js';
 import ambienteRouter from './routes/ambiente.routes.js';
 import centroRouter from './routes/centro.routes.js';
+import categoria from './routes/categorias.routes.js';
 import inventarioRouter from './routes/inventario.routes.js';
 import usuarioRouter from './routes/usuario.routes.js';
 import UsuxinvenRouter from './routes/UsuXinven.routes.js';
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 
 // Rutas
 app.use('/', ambienteRouter); // Corregido el uso del enrutador de ambiente
+app.use('/', categoria); 
 app.use('/', centroRouter); 
 app.use('/',inventarioRouter);
 app.use('/',tokenRouter);

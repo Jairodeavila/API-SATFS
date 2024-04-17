@@ -28,3 +28,34 @@ export const GetDetallesById = async (req, res) => {
         res.status(500).json({ message: 'Something went wrong' });
     }
 }
+
+
+// Función para actualizar un registro de detalle cambiando su estado
+export const updateDetalle = async (req, res) => {
+    try {
+        const { obj_id } = req.params;
+        const { atri_obj, val_ingre, est_obj,est_plac } = req.body;
+
+        // Verificar si existe el detalle
+        const data = await Detalles.findByPk(id_inve);
+
+        if (!data) {
+            res.status(404).send("Detalle doesn't exist");
+        } else {
+            // Actualizar el estado del detalle
+            const responses = await Detalles.update(
+                { atri_obj: atri_obj, val_ingre: val_ingre, est_obj: est_obj,est_plac:est_plac},
+                { where: { obj_id: obj_id } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

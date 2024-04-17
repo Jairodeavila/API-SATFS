@@ -50,4 +50,34 @@ export const createCategoria = async (req, res) => {
         response(res,500,500,"Something went wrong ");
         console.log(err);
     }
-}
+};
+
+// Función para actualizar un registro de categortia cambiando su estado
+export const updateCategoria = async (req, res) => {
+    try {
+        const { id_cate } = req.params;
+        const { nom_cate } = req.body;
+
+        // Verificar si existe el categoria
+        const data = await Categoria.findByPk(id_cate);
+
+        if (!data) {
+            res.status(404).send("Categoria doesn't exist");
+        } else {
+            // Actualizar el estado del categortia
+            const responses = await Categoria.update(
+                { nom_cate: nom_cate },
+                { where: { id_cate: id_cate } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};

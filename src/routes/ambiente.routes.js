@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllAmbientes, GetAmbientesById, createAmbiente } from '../controllers/ambienteController.js';
+import { GetAllAmbientes, GetAmbientesById, createAmbiente, updateAmbiente } from '../controllers/ambienteController.js';
 
 const router = express.Router();
 
@@ -7,6 +7,9 @@ const router = express.Router();
 router.get('/ambiente/all', GetAllAmbientes); // Cambiado a '/ambientes'
 // Ruta para obtener todos los ambientes
 router.get('/ambiente/:id', GetAmbientesById); // Cambiado a '/ambientes'
+
+
+router.put('/ambiente/:amb_id/update', updateAmbiente); 
 
 export default router;
  

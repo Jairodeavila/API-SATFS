@@ -1,14 +1,14 @@
 import { DataTypes } from "sequelize";
-import { connection } from "../database/db";
+import { connection } from "../database/db.js";
 
 const Categoria = connection.define('Categoria', {
-    id_cat:{
+    id_cate:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    nom_cat:{
+    nom_cate:{
         type: DataTypes.STRING,
         allowNull: false,
     },

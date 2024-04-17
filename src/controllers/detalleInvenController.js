@@ -53,3 +53,33 @@ export const createDetalleInve = async (req, res) => {
         console.log(err);
     }
 };
+
+// Función para actualizar un registro de detalleinven cambiando su estado
+export const updateDetalleInven = async (req, res) => {
+    try {
+        const { id_inv } = req.params;
+        const { id_obj } = req.body;
+
+        // Verificar si existe el detalleinven
+        const data = await InventariObj.findByPk(id_inv);
+
+        if (!data) {
+            res.status(404).send("Detalleinven doesn't exist");
+        } else {
+            // Actualizar el estado del detalleinven
+            const responses = await InventariObj.update(
+                { id_obj: id_obj },
+                { where: { id_inv: id_inv } }
+            );
+
+            if (responses) {
+                response(res, 200);
+            } else {
+                res.status(500).send("Error updating");
+            }
+        }
+    } catch (err) {
+        console.error(err);
+        response(res, 500, 500, "Something went wrong");
+    }
+};
