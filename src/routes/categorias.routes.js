@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllCategorias, GetCategoriasById, updateCategoria } from '../controllers/categoriasController.js';
+import { GetAllCategorias, GetCategoriasById, createCategoria, updateCategoria } from '../controllers/categoriasController.js';
 
 
 const router = express.Router();
@@ -8,6 +8,8 @@ const router = express.Router();
 router.get('/categorias/all', GetAllCategorias); // Cambiado a '/ambientes'
 // Ruta para obtener todos los ambientes
 router.get('/categorias/:id', GetCategoriasById); // Cambiado a '/ambientes'
+// Ruta para obtener todos los ambientes
+router.post('/categorias/:create', createCategoria); // Cambiado a '/ambientes'
 
 
 router.put('/categorias/:id_cate/update', updateCategoria); 

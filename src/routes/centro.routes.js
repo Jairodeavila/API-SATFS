@@ -1,5 +1,5 @@
 import express from 'express';
-import { GetAllCentros, GetCentrosById, updateCentro } from '../controllers/centrosController.js';
+import { CreateCentro, GetAllCentros, GetCentrosById, updateCentro } from '../controllers/centrosController.js';
 
 
 
@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/centro/all',GetAllCentros );
 
 router.get('/centro/:id',GetCentrosById );
+router.post('/centro/:create',CreateCentro );
 router.put('/centro/:cen_id/update',updateCentro );
 
 export default router;
