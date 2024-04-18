@@ -7,11 +7,11 @@ const router = express.Router();
 
 router.get('/usuario/all', Tokenverificacion, GetAllUsuario);
 
-router.get('/usuario/:id', GetUsuarioById);
+router.get('/usuario/:id',Tokenverificacion ,GetUsuarioById);
 
-router.post('/usuario/create', createUsuario);
+router.post('/usuario/create',Tokenverificacion ,createUsuario);
 
-router.put('/usuario/:num_doc/update', updateUsuario);
+router.put('/usuario/:num_doc/update',Tokenverificacion, updateUsuario);
 
 router.post('/usuario/login', UserLoggingin);
 
