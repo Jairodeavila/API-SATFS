@@ -5,7 +5,7 @@ export const GetAllObjetos = async (req, res, next) => {
         const objeto = await objetos.findAll();
         res.status(200).json(objeto);
     } catch (error) {
-        next(error);
+        next(error );
     }
 };
 
@@ -17,10 +17,10 @@ export const GetObjetoById = async (req, res) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: 'Objetos not found' });
+            res.status(404).json({ message: 'Objetos no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Algo salio mal' });
     }
 }
 
@@ -32,7 +32,7 @@ export const createObjeto = async (req, res) => {
         const existingObjeto = await objetos.findOne({ where: { id_obj: id_obj } });
 
         if (existingObjeto) {
-            response(res, 500, 107, "Objeto already exists");
+            response(res, 500, 107, "Objeto ya existe");
         } else {
             // Crear nuevo registro de objeto
             const newObjeto = await objetos.create({
@@ -51,11 +51,11 @@ export const createObjeto = async (req, res) => {
             if (newObjeto) {
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error creating");
+                response(res, 500, 500, "Error a el crear");
             }
         }
     } catch (err) {
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal");
         console.log(err);
     }
 };
@@ -70,7 +70,7 @@ export const updateObjeto = async (req, res) => {
         const data = await objetos.findByPk(id_obj);
 
         if (!data) {
-            res.status(404).send("Objeto doesn't exist");
+            res.status(404).send("Objeto no existe");
         } else {
             // Actualizar el estado del objetos
             const responses = await objetos.update(
@@ -81,11 +81,11 @@ export const updateObjeto = async (req, res) => {
             if (responses) {
                 response(res, 200);
             } else {
-                res.status(500).send("Error updating");
+                res.status(500).send("Error a el actualizar");
             }
         }
     } catch (err) {
         console.error(err);
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "algo salio mal ");
     }
 };

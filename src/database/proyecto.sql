@@ -1,3 +1,5 @@
+
+
 /*
 SQLyog Ultimate v13.1.1 (64 bit)
 MySQL - 10.4.28-MariaDB : Database - proyecto
@@ -27,12 +29,9 @@ CREATE TABLE `ambientes` (
   PRIMARY KEY (`amb_id`),
   KEY `Centro_FK` (`cen_fk`),
   CONSTRAINT `ambientes_ibfk_1` FOREIGN KEY (`cen_fk`) REFERENCES `centros` (`cen_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `ambientes` */
-
-insert  into `ambientes`(`amb_id`,`nom_amb`,`cen_fk`) values 
-(1,'adsp',1);
 
 /*Table structure for table `categoria` */
 
@@ -42,13 +41,9 @@ CREATE TABLE `categoria` (
   `id_cate` int(11) NOT NULL AUTO_INCREMENT,
   `nom_cate` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_cate`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `categoria` */
-
-insert  into `categoria`(`id_cate`,`nom_cate`) values 
-(1,'prueba'),
-(2,'prueba2');
 
 /*Table structure for table `centros` */
 
@@ -63,12 +58,9 @@ CREATE TABLE `centros` (
   `muni_id` char(20) DEFAULT NULL,
   PRIMARY KEY (`cen_id`),
   KEY `fk_muni123` (`muni_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `centros` */
-
-insert  into `centros`(`cen_id`,`nom_centro`,`dir_centro`,`tel_centro`,`sub_dir_nom`,`muni_id`) values 
-(1,'prueba ','123','123','123','1');
 
 /*Table structure for table `departamento` */
 
@@ -83,9 +75,6 @@ CREATE TABLE `departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `departamento` */
-
-insert  into `departamento`(`id_depart`,`nom_depart`,`pais_id_fk`) values 
-('123','123','123');
 
 /*Table structure for table `detalleinve` */
 
@@ -117,43 +106,6 @@ CREATE TABLE `detalles` (
 
 /*Data for the table `detalles` */
 
-/*Table structure for table `funcionario` */
-
-DROP TABLE IF EXISTS `funcionario`;
-
-CREATE TABLE `funcionario` (
-  `num_doc` int(10) NOT NULL,
-  `nom_fun` varchar(30) NOT NULL,
-  `ape_fun` varchar(30) NOT NULL,
-  `car_fun` varchar(20) NOT NULL COMMENT 'cargo del funcionario',
-  `correo_fun` varchar(50) NOT NULL,
-  `rol_fun` varchar(20) NOT NULL,
-  `contra` varchar(30) NOT NULL COMMENT 'contraseña del funcionario',
-  `tip_doc` varchar(4) DEFAULT NULL,
-  PRIMARY KEY (`num_doc`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `funcionario` */
-
-insert  into `funcionario`(`num_doc`,`nom_fun`,`ape_fun`,`car_fun`,`correo_fun`,`rol_fun`,`contra`,`tip_doc`) values 
-(102932323,'JUAN','OLIVARES','INSTRUCTOR','JUANOLIVARE@GMAIL','ADMINISTRADOR','123','CC');
-
-/*Table structure for table `funxinve` */
-
-DROP TABLE IF EXISTS `funxinve`;
-
-CREATE TABLE `funxinve` (
-  `id_fun` int(11) NOT NULL,
-  `id_inve` int(11) NOT NULL,
-  PRIMARY KEY (`id_fun`,`id_inve`),
-  UNIQUE KEY `funxinve_id_inve_id_fun_unique` (`id_fun`,`id_inve`),
-  KEY `id_inve` (`id_inve`),
-  CONSTRAINT `funxinve_ibfk_1` FOREIGN KEY (`id_fun`) REFERENCES `funcionario` (`num_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `funxinve_ibfk_2` FOREIGN KEY (`id_inve`) REFERENCES `inventario` (`id_inve`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `funxinve` */
-
 /*Table structure for table `inventario` */
 
 DROP TABLE IF EXISTS `inventario`;
@@ -170,7 +122,8 @@ CREATE TABLE `inventario` (
 
 insert  into `inventario`(`id_inve`,`fech_inve`,`Obs_inve`,`Est_inve`) values 
 (1,'2024-04-03 08:43:00','ninguna','activo'),
-(2,'2020-02-02 00:00:00','ninguna','yepes');
+(2,'2020-02-02 00:00:00','ninguna','yepes'),
+(4,'2020-02-02 00:00:00','observacion 4','listo');
 
 /*Table structure for table `municipio` */
 
@@ -187,9 +140,6 @@ CREATE TABLE `municipio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `municipio` */
-
-insert  into `municipio`(`id_muni`,`nom_muni`,`depart_id_fk`) values 
-('1','prueba',NULL);
 
 /*Table structure for table `objetos` */
 
@@ -211,13 +161,9 @@ CREATE TABLE `objetos` (
   KEY `amb_id` (`id_amb`),
   CONSTRAINT `objetos_ibfk_4` FOREIGN KEY (`id_amb`) REFERENCES `ambientes` (`amb_id`),
   CONSTRAINT `objetos_ibfk_5` FOREIGN KEY (`id_cate`) REFERENCES `categoria` (`id_cate`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 /*Data for the table `objetos` */
-
-insert  into `objetos`(`id_obj`,`id_cate`,`ser_obj`,`id_amb`,`fech_adqui`,`est_obj`,`obser_obj`,`tip_obj`,`marc_obj`,`val_obj`) values 
-(1,1,'123',1,'2024-04-11 10:03:23','prueba','prueba','prueba','prueba',123),
-(2,2,'prueba',1,'2024-04-12 10:03:23','est_obj','prueba','prueba','prueba',123);
 
 /*Table structure for table `roles` */
 
@@ -234,28 +180,32 @@ CREATE TABLE `roles` (
 /*Data for the table `roles` */
 
 insert  into `roles`(`id_Rol`,`nom_Rol`,`createdAt`,`updatedAt`) values 
-(1,'admin','2024-04-07 10:05:51','2024-04-16 10:05:53'),
-(2,'admin','2024-04-07 15:05:51','2024-04-16 15:05:53'),
 (9,'admin','2024-04-03 08:38:56','2024-04-03 08:38:59');
 
-/*Table structure for table `tokens` */
+/*Table structure for table `token` */
 
-DROP TABLE IF EXISTS `tokens`;
+DROP TABLE IF EXISTS `token`;
 
-CREATE TABLE `tokens` (
-  `id_token` int(255) NOT NULL AUTO_INCREMENT,
-  `token` varchar(255) DEFAULT NULL,
-  `fec_caducidad` varchar(100) DEFAULT NULL,
-  `user_id_fk` int(10) DEFAULT NULL,
-  `tipo_token` char(1) DEFAULT NULL COMMENT '1: inicio Sesion, 2: verificacion Email, 3: recuperacion de contraseña, 4: Verificar IP',
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL,
+CREATE TABLE `token` (
+  `id_token` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  `fec_caducidad` int(11) NOT NULL,
+  `user_id_fk` int(11) NOT NULL,
+  `tipo_token` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id_token`),
-  KEY `num_doc` (`user_id_fk`),
-  CONSTRAINT `tokens_ibfk_1` FOREIGN KEY (`user_id_fk`) REFERENCES `usuario` (`num_doc`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `user_id_fk` (`user_id_fk`),
+  CONSTRAINT `token_ibfk_1` FOREIGN KEY (`user_id_fk`) REFERENCES `usuario` (`num_doc`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-/*Data for the table `tokens` */
+/*Data for the table `token` */
+
+insert  into `token`(`id_token`,`token`,`fec_caducidad`,`user_id_fk`,`tipo_token`,`createdAt`,`updatedAt`) values 
+(1,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW9fZnVuIjoiYW5kcmVzQGdtYWlsLmNvbSIsImlhdCI6MTcxMzM2NTIyNywiZXhwIjoxNzEzNDUxNjI3fQ.GeUgJzQGUXckfAc7Gijehor5zzZ5EfRoyITInjTIrmc',1713451627,123456,'1','2024-04-17 14:47:07','2024-04-17 14:47:07'),
+(2,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW9fZnVuIjoiYW5kcmVzQGdtYWlsLmNvbSIsImlhdCI6MTcxMzM2NjE1NCwiZXhwIjoxNzEzNDUyNTU0fQ.fow0vZsl4da-SChIWNX8EJejzPk-GqySiubIl9XWlw8',1713452554,123456,'1','2024-04-17 15:02:34','2024-04-17 15:02:34'),
+(3,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW9fZnVuIjoiYW5kcmVzQGdtYWlsLmNvbSIsImlhdCI6MTcxMzQ0NTkwNCwiZXhwIjoxNzEzNTMyMzA0fQ.WvMhWBfmItAgNXScQckMbeUYJe5mXoS43lfUHoIdFTM',1713532304,123456,'1','2024-04-18 13:11:44','2024-04-18 13:11:44'),
+(4,'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb3JyZW9fZnVuIjoiYW5kcmVzQGdtYWlsLmNvbSIsImlhdCI6MTcxMzQ0NjI4MCwiZXhwIjoxNzEzNTMyNjgwfQ.X7mtZYUOubgkOqPMDaWedd3EKaQgf44vloasz_TpUUo',1713532680,123456,'1','2024-04-18 13:18:00','2024-04-18 13:18:00');
 
 /*Table structure for table `usuario` */
 
@@ -268,7 +218,7 @@ CREATE TABLE `usuario` (
   `car_fun` varchar(20) NOT NULL COMMENT 'cargo del funcionario',
   `correo_fun` varchar(50) NOT NULL,
   `rol_fun` varchar(20) NOT NULL,
-  `contra` varchar(30) NOT NULL COMMENT 'contraseña del funcionario',
+  `password` varchar(255) NOT NULL COMMENT 'contraseña del funcionario',
   `tip_doc` varchar(4) DEFAULT NULL,
   `fot_use` varchar(255) DEFAULT NULL,
   `est_email_func` int(1) DEFAULT NULL,
@@ -281,11 +231,11 @@ CREATE TABLE `usuario` (
 
 /*Data for the table `usuario` */
 
-insert  into `usuario`(`num_doc`,`nom_fun`,`ape_fun`,`car_fun`,`correo_fun`,`rol_fun`,`contra`,`tip_doc`,`fot_use`,`est_email_func`,`tel_fun`,`id_rol_fk`) values 
-(1,'jainer','manuel','aprendiz','jainer@gmail.com','admin','123','Conn','prueba',1,'123',9),
-(2,'jandy','manuel','aprendiz','jandy@gmail.com','admin','123','cc: ','prueba',1,'123',9),
+insert  into `usuario`(`num_doc`,`nom_fun`,`ape_fun`,`car_fun`,`correo_fun`,`rol_fun`,`password`,`tip_doc`,`fot_use`,`est_email_func`,`tel_fun`,`id_rol_fk`) values 
+(123,'tati','manuel','aprendiz','jandy@gmail.com','admin','$2b$10$0XxSQV4ejmhuklRt2WZ.v.y','cc ','prueba',1,'123',9),
 (321,'keine','manue','estudiante','keinemanue@gmail.maricon','normas','1234','ti','fmdksfs',1,'23334',9),
-(1231,'jairo','de avila ','admin','jairo@gmail.com','admin','1234','cc','fdgfs',0,'34234',9);
+(1231,'jairo','de avila ','admin','jairo@gmail.com','admin','1234','cc','fdgfs',0,'34234',9),
+(123456,'tati','manuel','aprendiz','andres@gmail.com','admin','$2b$05$jnoUaF1n8dJ8FR1VcTSOieqM270GKz5Bc//UblyWknOjLbzE3bsJi','cc ','prueba',1,'123',9);
 
 /*Table structure for table `usuxinve` */
 
@@ -304,26 +254,6 @@ CREATE TABLE `usuxinve` (
 
 insert  into `usuxinve`(`id_fun`,`id_inve`) values 
 (1231,1);
-
-/*Table structure for table `usuxinven` */
-
-DROP TABLE IF EXISTS `usuxinven`;
-
-CREATE TABLE `usuxinven` (
-  `id_fun` int(11) NOT NULL,
-  `id_inve` int(11) NOT NULL,
-  PRIMARY KEY (`id_fun`,`id_inve`),
-  UNIQUE KEY `usuxinven_id_inve_id_fun_unique` (`id_fun`,`id_inve`),
-  KEY `id_inve` (`id_inve`),
-  CONSTRAINT `usuxinven_ibfk_1` FOREIGN KEY (`id_fun`) REFERENCES `funcionario` (`num_doc`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `usuxinven_ibfk_2` FOREIGN KEY (`id_inve`) REFERENCES `inventario` (`id_inve`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-/*Data for the table `usuxinven` */
-
-insert  into `usuxinven`(`id_fun`,`id_inve`) values 
-(102932323,1),
-(102932323,2);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -22,10 +22,10 @@ export const GetusuxinvenById = async (req, res) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: 'Funxinven not found' });
+            res.status(404).json({ message: 'Funxinven no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Algo salio mal ' });
     }
 }
 
@@ -38,7 +38,7 @@ export const createUsuXinve = async (req, res) => {
         const existingUsuXinve = await usuxinven.findOne({ where: { id_fun: id_fun } });
 
         if (existingUsuXinve) {
-            response(res, 500, 107, "UsuXinve already exists");
+            response(res, 500, 107, "UsuXinve ya existe");
         } else {
             // Crear nuevo registro de usuxinven
             const newUsuXinve = await usuxinven.create({
@@ -50,11 +50,11 @@ export const createUsuXinve = async (req, res) => {
             if (newUsuXinve) {
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error creating");
+                response(res, 500, 500, "Error a el crear");
             }
         }
     } catch (err) {
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal");
         console.log(err);
     }
 };
@@ -69,7 +69,7 @@ export const updateUsuXinven = async (req, res) => {
         const data = await usuxinven.findByPk(id_fun);
 
         if (!data) {
-            res.status(404).send("Usuxinven doesn't exist");
+            res.status(404).send("Usuxinven no existe");
         } else {
             // Actualizar el estado del usuxinven
             const responses = await usuxinven.update(
@@ -80,11 +80,11 @@ export const updateUsuXinven = async (req, res) => {
             if (responses) {
                 response(res, 200);
             } else {
-                res.status(500).send("Error updating");
+                res.status(500).send("Error a el actualizar");
             }
         }
     } catch (err) {
         console.error(err);
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal");
     }
 };

@@ -19,7 +19,7 @@ export const GetAllUsuario = async (req, res, next) => {
                 response(res, 404, 404);
             }
         } catch (err) {
-            response(res, 500, 'something went wrong');
+            response(res, 500, 'Algo salio mal');
         }
     })
    
@@ -34,10 +34,10 @@ export const GetUsuarioById = async (req, res) => {
             if (data) {
                 res.status(200).json(data);
             } else {
-                res.status(404).json({ message: 'Funcionario not found' });
+                res.status(404).json({ message: 'Funcionario no encontrado' });
             }
         } catch (err) {
-            res.status(500).json({ message: 'Something went wrong' });
+            res.status(500).json({ message: 'Algo salio mal' });
         }
     })
         
@@ -51,7 +51,7 @@ export const createUsuario = async (req, res) => {
             const existingUsuario = await usuarios.findOne({ where: { num_doc: num_doc } });
             const passEncripted = await bcrypt.hash(password, 5); 
             if (existingUsuario) {
-                response(res, 500, 107, "Usuario already exists");
+                response(res, 500, 107, "Usuario no existe");
             } else {
                 // Crear nuevo registro de usuario
                 const newUsuario = await usuarios.create({
@@ -74,11 +74,11 @@ export const createUsuario = async (req, res) => {
                 if (newUsuario) {
                     response(res, 200);
                 } else {
-                    response(res, 500, 500, "Error creating");
+                    response(res, 500, 500, "Error a el crear");
                 }
             }
         } catch (err) {
-            response(res, 500, 500, "Something went wrong");
+            response(res, 500, 500, "Algo salio mal");
             console.log(err);
         }
     })
@@ -96,7 +96,7 @@ export const updateUsuario = async (req, res) => {
             const data = await usuarios.findByPk(num_doc);
     
             if (!data) {
-                res.status(404).send("Usuario doesn't exist");
+                res.status(404).send("Usuario no existe");
             } else {
                 // Actualizar el estado del usuario
                 const responses = await usuarios.update(
@@ -118,12 +118,12 @@ export const updateUsuario = async (req, res) => {
                 if (responses) {
                     response(res, 200);
                 } else {
-                    res.status(500).send("Error updating");
+                    res.status(500).send("Error a el actualizar");
                 }
             }
         } catch (err) {
             console.error(err);
-            response(res, 500, 500, "Something went wrong");
+            response(res, 500, 500, "Algo salio mal");
         }
     })
     

@@ -10,7 +10,7 @@ export const GetAllCategorias = async (req, res) => {
             response(res, 404, 404);
         }
     } catch (err) {
-        response(res, 500, 'something went wrong');
+        response(res, 500, 'algo salió mal');
     }
 }
 
@@ -22,10 +22,10 @@ export const GetCategoriasById = async (req, res) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: 'categoria  not found' });
+            res.status(404).json({ message: 'Entorno no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Algo salió mal' });
     }
 }
 export const createCategoria = async (req, res) => {
@@ -34,7 +34,7 @@ export const createCategoria = async (req, res) => {
 
         const existingCategoria = await Categoria.findOne({where: {id_cate: id_cate}});
         if (existingCategoria) {
-            response(res, 500, 107, "categoria already exists");
+            response(res, 500, 107, "categoria ya existe");
         } else {
             const newCategoria = existingCategoria = await Categoria.create({
                 id_cate: id_cate,
@@ -43,11 +43,11 @@ export const createCategoria = async (req, res) => {
             if (newCategoria){
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error creating");
+                response(res, 500, 500, "Error a el crear");
             }
         }
     } catch (err) {
-        response(res,500,500,"Something went wrong ");
+        response(res,500,500,"Algo salió mal ");
         console.log(err);
     }
 };
@@ -62,7 +62,7 @@ export const updateCategoria = async (req, res) => {
         const data = await Categoria.findByPk(id_cate);
 
         if (!data) {
-            res.status(404).send("Categoria doesn't exist");
+            res.status(404).send("Categoria no existe");
         } else {
             // Actualizar el estado del categortia
             const responses = await Categoria.update(
@@ -73,11 +73,11 @@ export const updateCategoria = async (req, res) => {
             if (responses) {
                 response(res, 200);
             } else {
-                res.status(500).send("Error updating");
+                res.status(500).send("Error a el actualizar");
             }
         }
     } catch (err) {
         console.error(err);
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salió mal");
     }
 };
