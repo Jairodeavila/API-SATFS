@@ -10,7 +10,7 @@ export const GetAllCentros = async (req, res) => {
             response(res, 404, 404);
         }
     } catch (err) {
-        response(res, 500, 'something went wrong');
+        response(res, 500, 'Algo salio mal');
     }
 }
 
@@ -22,10 +22,10 @@ export const GetCentrosById = async (req, res) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: 'categoria  not found' });
+            res.status(404).json({ message: 'Centro no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Algo salio mal' });
     }
 }
 
@@ -35,7 +35,7 @@ export const CreateCentro = async (req, res) => {
 
         const newCentro = await Centro.findOne({where: {cen_id: cen_id} });
         if (existingCentro){
-            response(res, 500, 107, "centro already exists");
+            response(res, 500, 107, "centro ya existe");
         } else{
             // Crear nuevo registro de centro
             const newCentro = await Centro.create({
@@ -49,11 +49,11 @@ export const CreateCentro = async (req, res) => {
             if (newCentro) {
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error creating");
+                response(res, 500, 500, "Error a el crear");
             }
         }
     } catch(err){
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal");
         console.log(err);
     }
 };
@@ -69,7 +69,7 @@ export const updateCentro = async (req, res) => {
         const data = await Centro.findByPk(id_inve);
 
         if (!data) {
-            res.status(404).send("Centro doesn't exist");
+            res.status(404).send("Centro no existe");
         } else {
             // Actualizar el estado del centro
             const responses = await Centro.update(
@@ -80,7 +80,7 @@ export const updateCentro = async (req, res) => {
             if (responses) {
                 response(res, 200);
             } else {
-                res.status(500).send("Error updating");
+                res.status(500).send("Error a el actualizar");
             }
         }
     } catch (err) {

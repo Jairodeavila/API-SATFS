@@ -9,7 +9,7 @@ export const GetAllMunicipio = async (req, res) => {
             response(res, 404, 404);
         }
     } catch (err) {
-        response(res, 500, 'something went wrong');
+        response(res, 500, 'Algo salio mal');
     }
 };
 
@@ -21,10 +21,10 @@ export const GetMunicipioById = async (req, res) => {
         if (data) {
             res.status(200).json(data);
         } else {
-            res.status(404).json({ message: 'Municipios not found' });
+            res.status(404).json({ message: 'Municipios no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Algo salio mal' });
     }
 }
 
@@ -36,7 +36,7 @@ export const createMunicipio = async (req, res) => {
         const existingMunicipio = await municipios.findOne({ where: { id_muni: id_muni } });
 
         if (existingMunicipio) {
-            response(res, 500, 107, "Municipio already exists");
+            response(res, 500, 107, "Municipio ya existe");
         } else {
             // Crear nuevo registro de municipio
             const newMunicipio = await municipios.create({
@@ -48,11 +48,11 @@ export const createMunicipio = async (req, res) => {
             if (newMunicipio) {
                 response(res, 200);
             } else {
-                response(res, 500, 500, "Error creating");
+                response(res, 500, 500, "Error a el crear");
             }
         }
     } catch (err) {
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal ");
         console.log(err);
     }
 };
@@ -66,7 +66,7 @@ export const updateMunicipio = async (req, res) => {
         const data = await municipios.findByPk(id_muni);
 
         if (!data) {
-            res.status(404).send("Municipio doesn't exist");
+            res.status(404).send("Municipio no existe");
         } else {
             // Actualizar el estado del municipio
             const responses = await municipios.update(
@@ -77,11 +77,11 @@ export const updateMunicipio = async (req, res) => {
             if (responses) {
                 response(res, 200);
             } else {
-                res.status(500).send("Error updating");
+                res.status(500).send("Error a el actualizar");
             }
         }
     } catch (err) {
         console.error(err);
-        response(res, 500, 500, "Something went wrong");
+        response(res, 500, 500, "Algo salio mal");
     }
 };

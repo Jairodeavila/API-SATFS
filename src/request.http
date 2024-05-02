@@ -7,6 +7,17 @@ Content-Type: application/json
 GET    http://localhost:3000/token/all
 Content-Type: application/json
 
+###
+POST http://localhost:3000/ambiente/create
+Content-Type: application/json
+
+{
+    "amb_id": 2 ,
+    "nom_amb": "ambient" ,
+    "cen_fk": 1
+   
+}
+
 
 ###
 put http://localhost:3000/ambiente/1/update
@@ -26,12 +37,14 @@ GET    http://localhost:3000/categorias/1
 Content-Type: application/json
 
 
+
+
 ###
 put http://localhost:3000/categorias/1/update
 Content-Type: application/json
 
 {   
-    "nom_cate": "Categoria 0"
+    "nom_cate": "Categoria 1"
     
 }
 
@@ -157,7 +170,7 @@ POST http://localhost:3000/municipio/create
 Content-Type: application/json
 
 {
-    "id_muni": 2,
+    "id_muni": 4,
     "nom_muni":"prueba"
     
 }

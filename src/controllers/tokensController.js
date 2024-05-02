@@ -14,14 +14,14 @@ export const GetAllToken = (req, res, next) =>{
                 if(token) {
                     response(res, 200, token);
                 }  else{
-                    response(res,404,404, "no encontrado");
+                    response(res,404,404, "Token no encontrado");
                 }
             } catch (err) {
 
                 if (err.errno) {
-                    response(res, 500, 500, "something went wrong");
+                    response(res, 500, 500, "Algo salio mal");
                 } else {
-                    response(res, 500, 500, "something went wrong");
+                    response(res, 500, 500, "Algo salio mal");
                 }
             }
         }
