@@ -1,9 +1,9 @@
-import Centro from "../models/centrosModel.js";
+import centro from "../models/centrosModel.js";
 import { response } from "../utils/response.js";
 
 export const GetAllCentros = async (req, res) => {
     try {
-        const data = await Centro.findAll();
+        const data = await centro.findAll();
         if (data) {
             response(res, 200, 200, data);
         } else {
@@ -17,7 +17,7 @@ export const GetAllCentros = async (req, res) => {
 export const GetCentrosById = async (req, res) => {
     try {
         const { id } = req.params;
-        const data = await Centro.findByPk(id);
+        const data = await centro.findByPk(id);
 
         if (data) {
             res.status(200).json(data);
@@ -33,12 +33,12 @@ export const CreateCentro = async (req, res) => {
     try{
         const {cen_id, nom_centro, dir_centro, tel_centro, sub_dir_nom, muni_id} = req.body;
 
-        const newCentro = await Centro.findOne({where: {cen_id: cen_id} });
+        const existingCentro = await centro.findOne({where: {cen_id: cen_id} });
         if (existingCentro){
             response(res, 500, 107, "centro ya existe");
         } else{
             // Crear nuevo registro de centro
-            const newCentro = await Centro.create({
+            const newCentro = await centro.create({
                 cen_id: cen_id,
                 nom_centro: nom_centro,
                 dir_centro: dir_centro,
@@ -66,13 +66,13 @@ export const updateCentro = async (req, res) => {
         const { nom_centro, dir_centro, tel_centro, sub_dir_nom, muni_id } = req.body;
 
         // Verificar si existe el centro
-        const data = await Centro.findByPk(id_inve);
+        const data = await centro.findByPk(cen_id);
 
         if (!data) {
             res.status(404).send("Centro no existe");
         } else {
             // Actualizar el estado del centro
-            const responses = await Centro.update(
+            const responses = await centro.update(
                 { nom_centro: nom_centro, dir_centro: dir_centro, tel_centro: tel_centro, sub_dir_nom:sub_dir_nom, muni_id:muni_id },
                 { where: { cen_id: cen_id } }
             );

@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { connection } from '../database/db.js'; // Importa la instancia de Sequelize
 import ambientes from './ambienteModel.js';
 
-  const Centro = connection.define('Centro', {
+  const centro = connection.define('centro', {
   cen_id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -24,7 +24,7 @@ import ambientes from './ambienteModel.js';
     type: DataTypes.STRING(30),
     allowNull: true
   },
-  muni_idFK: {
+  muni_id: {
     type: DataTypes.STRING(20),
     allowNull: true
   }
@@ -42,4 +42,4 @@ connection.sync()
     console.error('Error al sincronizar los modelos con la base de datos:', err);
   });
 
-export default Centro;
+export default centro;

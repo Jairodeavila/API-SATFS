@@ -4,7 +4,7 @@ GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###
-GET    http://localhost:3000/token/all
+GET    http://localhost:3000/ambiente/2
 Content-Type: application/json
 
 ###
@@ -18,13 +18,12 @@ Content-Type: application/json
    
 }
 
-
 ###
 put http://localhost:3000/ambiente/1/update
 Content-Type: application/json
 
 {   
-    "nom_cate": "sistemas"
+    "nom_amb": "Ambiente"
 }
 
 //CATEGORIAS
@@ -36,8 +35,14 @@ Content-Type: application/json
 GET    http://localhost:3000/categorias/1
 Content-Type: application/json
 
+###
+POST http://localhost:3000/categorias/create
+Content-Type: application/json
 
-
+{
+    "id_cate": 4,
+    "nom_cate": "prueba4"
+}
 
 ###
 put http://localhost:3000/categorias/1/update
@@ -47,6 +52,42 @@ Content-Type: application/json
     "nom_cate": "Categoria 1"
     
 }
+
+//CENTRO
+
+###
+GET    http://localhost:3000/centro/all
+Content-Type: application/json
+
+###
+GET    http://localhost:3000/centro/1
+Content-Type: application/json
+
+###
+POST http://localhost:3000/centro/create
+Content-Type: application/json
+
+{
+    "cen_id": 2,
+    "nom_centro": "prueba ",
+    "dir_centro": "Calle 302",
+    "tel_centro": "123",
+    "sub_dir_nom": "123",
+    "muni_id": "1"
+}
+
+###
+put http://localhost:3000/centro/1/update
+Content-Type: application/json
+
+{
+  "nom_centro": "prueba ",
+  "dir_centro": "Calle 30",
+  "tel_centro": "123",
+  "sub_dir_nom": "123",
+  "muni_id": 1
+}
+
 
 //INVENTARIO
 ###
@@ -254,6 +295,26 @@ Content-Type: application/json
     "updatedAt": "2024-04-09T17:56:41.000Z"
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//USUARIO
 ###
 POST http://localhost:3000/users/createuser
 Content-Type: application/json
@@ -264,9 +325,6 @@ Content-Type: application/json
     "apellido": "yepes",
     "telefono": "123456789"
 }
-
-
-
 
 ###
 

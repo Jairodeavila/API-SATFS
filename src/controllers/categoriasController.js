@@ -30,13 +30,13 @@ export const GetCategoriasById = async (req, res) => {
 }
 export const createCategoria = async (req, res) => {
     try {
-        const { id_cate,nom_cate } = req.body;
+        const { id_cate, nom_cate } = req.body;
 
         const existingCategoria = await Categoria.findOne({where: {id_cate: id_cate}});
         if (existingCategoria) {
             response(res, 500, 107, "categoria ya existe");
         } else {
-            const newCategoria = existingCategoria = await Categoria.create({
+            const newCategoria = await Categoria.create({
                 id_cate: id_cate,
                 nom_cate: nom_cate
             });
