@@ -27,3 +27,4 @@ connection.sync()
   });
 
 export default Categoria;
+

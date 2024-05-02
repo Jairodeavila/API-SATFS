@@ -1,6 +1,7 @@
 // index.js
 import express from 'express';
 import { connection } from './database/db.js';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import tokenRouter from './routes/token.routes.js';
@@ -16,10 +17,15 @@ import rolesRouter from './routes/roles.routes.js';
 dotenv.config();
 
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors({
+  origin: 'http://localhost:8081' // Solo permite solicitudes desde http://localhost:8081
+}));
+
 
 // Rutas
 app.use('/', ambienteRouter); // Corregido el uso del enrutador de ambiente
