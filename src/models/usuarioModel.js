@@ -23,7 +23,7 @@ const usuario = connection.define('usuario',{
     type: DataTypes.STRING,
     allowNull: false,
   },
-  correo_fun:{
+  email:{
     type: DataTypes.STRING,
     allowNull: false,
   },

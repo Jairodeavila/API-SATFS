@@ -47,7 +47,7 @@ export const createUsuario = async (req, res) => {
     jwt.verify(req.token, process.env.SECREDWORD, async(err, data)=>{
         try {
         
-            const { num_doc, nom_fun, ape_fun, car_fun, correo_fun, rol_fun, password, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
+            const { num_doc, nom_fun, ape_fun, car_fun, email, rol_fun, password, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
             const existingUsuario = await usuarios.findOne({ where: { num_doc: num_doc } });
             const passEncripted = await bcrypt.hash(password, 5); 
             if (existingUsuario) {
@@ -59,7 +59,7 @@ export const createUsuario = async (req, res) => {
                     nom_fun:nom_fun,
                     ape_fun: ape_fun,
                     car_fun: car_fun,
-                    correo_fun: correo_fun,
+                    email: email,
                     rol_fun: rol_fun,
                     password: passEncripted,
                     tip_doc: tip_doc,
@@ -90,7 +90,7 @@ export const updateUsuario = async (req, res) => {
     jwt.verify(req.token, process.env.SECREDWORD, async (req, res) => {
         try {
             const { num_doc } = req.params;
-            const { nom_fun, ape_fun, car_fun, correo_fun, rol_fun, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
+            const { nom_fun, ape_fun, car_fun, email, rol_fun, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
     
             // Verificar si existe el usuario
             const data = await usuarios.findByPk(num_doc);
@@ -105,7 +105,7 @@ export const updateUsuario = async (req, res) => {
                         nom_fun:nom_fun,
                         ape_fun: ape_fun,
                         car_fun: car_fun,
-                        correo_fun: correo_fun,
+                        email: email,
                         rol_fun: rol_fun,
                         tip_doc: tip_doc,
                         fot_use: fot_use,
@@ -133,10 +133,10 @@ export const updateUsuario = async (req, res) => {
 
 
 export const UserLoggingin = async (req, res) => {
-    const { correo_fun, password } = req.body;
+    const { email, password } = req.body;
 
     try {
-        let user = await usuarios.findOne({ where: { correo_fun: correo_fun } });
+        let user = await usuarios.findOne({ where: { email: email } });
 
         if (user) {
             user = user.dataValues;
@@ -145,7 +145,7 @@ export const UserLoggingin = async (req, res) => {
             const passEncripted = await bcrypt.compare(password, user.password); 
 
             if (passEncripted) {
-                const token = await generateAuthToken(correo_fun, password); // Pasar correo_fun y password como parámetros
+                const token = await generateAuthToken(email, password); // Pasar correo_fun y password como parámetros
                 console.log(token);
                 
                  const decode =  jwt.decode(token,process.env.SECREDWORD)
@@ -174,11 +174,11 @@ export const UserLoggingin = async (req, res) => {
     }
 };
 
-export const generateAuthToken = async (correo_fun) => { 
+export const generateAuthToken = async (email) => { 
     const secretKey = process.env.SECREDWORD; 
     console.log(secretKey); 
     const payload = {
-        correo_fun: correo_fun
+        email: email
         
     }; 
 
