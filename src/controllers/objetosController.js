@@ -26,17 +26,9 @@ export const GetObjetoById = async (req, res) => {
 
 export const createObjeto = async (req, res) => {
     try {
-        const {id_obj, id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj  } = req.body;
-
-    
-        const existingObjeto = await objetos.findOne({ where: { id_obj: id_obj } });
-
-        if (existingObjeto) {
-            response(res, 500, 107, "Objeto ya existe");
-        } else {
+        const {id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj  } = req.body;
             // Crear nuevo registro de objeto
             const newObjeto = await objetos.create({
-                id_obj: id_obj,
                 id_cate:id_cate,
                 ser_obj:ser_obj,
                 id_amb:id_amb,
@@ -53,7 +45,7 @@ export const createObjeto = async (req, res) => {
             } else {
                 response(res, 500, 500, "Error a el crear");
             }
-        }
+        
     } catch (err) {
         response(res, 500, 500, "Algo salio mal");
         console.log(err);
