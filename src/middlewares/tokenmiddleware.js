@@ -1,5 +1,6 @@
 import jsonwebtoken from 'jsonwebtoken';
-import {response} from '../utils/response.js'
+import Token from '../models/tokens.js';
+import { response } from '../utils/response.js';
 const jwt = jsonwebtoken;
 
 export const Tokenverificacion = async (req, res, next) => {
@@ -17,7 +18,7 @@ export const Tokenverificacion = async (req, res, next) => {
 
             if (fechaActual > decodetoken.payload.exp) {
 
-                response(res,400,105,"Expired token");
+                response(res,401,401,"Expired token");
             }else{
 
                 req.token = bearerToken;
@@ -37,20 +38,30 @@ export const Tokenverificacion = async (req, res, next) => {
             const fechaActual = Math.floor(Date.now() / 1000);
 
             if (fechaActual > decodetoken.payload.exp) {
-                response(res,400,105,"Expired token");
+                response(res,401,401,"Expired token");
             }else{
                 req.token = bearerToken;
-                next();
+                console.log(bearerToken)
+                jwt.verify(bearerToken, 'CANTS',async (err,data)=>{
+                    if(err){
+                        response(res,401,401, err);
+                    }else{
+                        
+                                req.Tokendata = data;
+                           
+                                next();
+                                
+                            
+                    }
+                });
+            
             }
-
-           
-
         } else {
             
-            response(res,400,101,"invalid token");
+            response(res,401,401,"invalid token");
         }
     } catch (error) {
 
-        response(res,400,101,"invalid token");
+        response(res,401,401,"invalid token");
     }
 }

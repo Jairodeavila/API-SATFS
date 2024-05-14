@@ -47,12 +47,14 @@ export const createUsuario = async (req, res) => {
     jwt.verify(req.token, process.env.SECREDWORD, async(err, data)=>{
         try {
         
-            const { num_doc, nom_fun, ape_fun, car_fun, email, rol_fun, password, tip_doc, fot_use, est_email_func, tel_fun, id_rol_fk } = req.body;
-            const existingUsuario = await usuarios.findOne({ where: { num_doc: num_doc } });
+            const { num_doc, nom_fun, ape_fun, car_fun, email, password, tip_doc, tel_fun, id_rol_fk } = req.body;
+            const existingUsuario = await usuarios.findByPk();
             const passEncripted = await bcrypt.hash(password, 5); 
+            console.log(existingUsuario);
             if (existingUsuario) {
-                response(res, 500, 107, "Usuario no existe");
+                response(res, 500, 107, "El usuario ya se encuentra registrado");
             } else {
+
                 // Crear nuevo registro de usuario
                 const newUsuario = await usuarios.create({
                     num_doc: num_doc,
@@ -60,16 +62,13 @@ export const createUsuario = async (req, res) => {
                     ape_fun: ape_fun,
                     car_fun: car_fun,
                     email: email,
-                    rol_fun: rol_fun,
                     password: passEncripted,
                     tip_doc: tip_doc,
-                    fot_use: fot_use,
-                    est_email_func: est_email_func,
                     tel_fun: tel_fun,
-                    id_rol_fk: id_rol_fk
+                    id_rol_fk: id_rol_fk,
+
     
-    
-                });
+                }); console.log(newUsuario);
     
                 if (newUsuario) {
                     response(res, 200);
@@ -78,7 +77,7 @@ export const createUsuario = async (req, res) => {
                 }
             }
         } catch (err) {
-            response(res, 500, 500, "Algo salio mal");
+            response(res, 500, 500, err);
             console.log(err);
         }
     })

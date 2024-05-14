@@ -138,18 +138,16 @@ Content-Type: application/json
 {
 
     "num_doc":123456 ,
-    "nom_fun":"juan",
-    "nom_fun":"tati",
+    "nom_fun":"keiner",
     "ape_fun":"manuel",
-    "car_fun": "aprendiz",
-    "correo_fun":"andres@gmail.com",
+    "car_fun": "ADMINISTRADOR",
+    "email":"andres@gmail.com",
     "rol_fun":"admin",
     "password":"12345678",
     "tip_doc":"cc ",
-    "fot_use":"prueba",
     "est_email_func":"1",
     "tel_fun":"123",
-    "id_rol_fk": "9"
+    "id_rol_fk": "1"
 }
 
 ###
@@ -355,6 +353,6 @@ POST http://localhost:3000/usuario/login
 Content-Type: application/json
 
 {
-    "correo_fun":"andres@gmail.com",
+    "email":"keiner@gmail.com",
     "password":"12345678"
 }

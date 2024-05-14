@@ -5,7 +5,6 @@ import Roles from './rolesModels.js'
 const usuario = connection.define('usuario',{
   num_doc:{
     type: DataTypes.INTEGER,
-    autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
@@ -27,24 +26,12 @@ const usuario = connection.define('usuario',{
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rol_fun:{
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   password:{
     type: DataTypes.STRING,
     allowNull: false,
   },
   tip_doc:{
     type: DataTypes.STRING,
-    allowNull: false,
-  },
-  fot_use:{
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  est_email_func:{
-    type: DataTypes.INTEGER,
     allowNull: false,
   },
   tel_fun:{

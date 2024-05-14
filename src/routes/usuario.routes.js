@@ -5,11 +5,11 @@ import { GetUsuarioById, GetAllUsuario, createUsuario, UserLoggingin, updateUsua
 
 const router = express.Router();
 
-router.get('/usuario/all', Tokenverificacion, GetAllUsuario);
+router.get('/usuario/all',Tokenverificacion, GetAllUsuario);
 
 router.get('/usuario/:id',Tokenverificacion ,GetUsuarioById);
 
-router.post('/usuario/create',Tokenverificacion ,createUsuario);
+router.post('/usuario/create' ,Tokenverificacion ,createUsuario);
 
 router.put('/usuario/:num_doc/update',Tokenverificacion, updateUsuario);
 
