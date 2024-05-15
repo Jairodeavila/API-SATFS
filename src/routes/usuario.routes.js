@@ -9,7 +9,7 @@ router.get('/usuario/all',Tokenverificacion, GetAllUsuario);
 
 router.get('/usuario/:id',Tokenverificacion ,GetUsuarioById);
 
-router.post('/usuario/create' ,Tokenverificacion ,createUsuario);
+router.post('/usuario/create',createUsuario);
 
 router.put('/usuario/:num_doc/update',Tokenverificacion, updateUsuario);
 

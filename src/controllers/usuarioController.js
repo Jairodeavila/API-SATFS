@@ -50,7 +50,6 @@ export const createUsuario = async (req, res) => {
             const { num_doc, nom_fun, ape_fun, car_fun, email, password, tip_doc, tel_fun, id_rol_fk } = req.body;
             const existingUsuario = await usuarios.findByPk();
             const passEncripted = await bcrypt.hash(password, 5); 
-            console.log(existingUsuario);
             if (existingUsuario) {
                 response(res, 500, 107, "El usuario ya se encuentra registrado");
             } else {
@@ -68,7 +67,7 @@ export const createUsuario = async (req, res) => {
                     id_rol_fk: id_rol_fk,
 
     
-                }); console.log(newUsuario);
+                }); 
     
                 if (newUsuario) {
                     response(res, 200);
