@@ -143,11 +143,13 @@ export const UserLoggingin = async (req, res) => {
             const passEncripted = await bcrypt.compare(password, user.password); 
 
             if (passEncripted) {
-                const token = await generateAuthToken(email, password); // Pasar correo_fun y password como parámetros
+                const token = await generateAuthToken(email, password);
                 console.log(token);
                 
                  const decode =  jwt.decode(token,process.env.SECREDWORD)
+
                 console.log(decode);
+                
                 await Token.create({
                     fec_caducidad:decode.exp,
                     user_id_fk:user.num_doc,

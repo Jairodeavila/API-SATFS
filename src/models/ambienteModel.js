@@ -3,7 +3,7 @@ import { connection } from '../database/db.js';
 import Centro from './centrosModel.js'
 
 const Ambiente = connection.define('Ambiente', {
-  amb_id:{
+  id_amb:{
     type: DataTypes.INTEGER,
     autoIncrement: true,
     allowNull: false,

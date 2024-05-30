@@ -31,16 +31,16 @@ export const GetAmbientesById = async (req, res) => {
 
 export const createAmbiente = async (req, res) => {
     try{
-        const{amb_id, nom_amb, cen_fk} = req.body;
+        const{id_amb, nom_amb, cen_fk} = req.body;
 
-        const existingAmbiente = await ambientes.findOne({ where: { amb_id: amb_id } });
+        const existingAmbiente = await ambientes.findOne({ where: { id_amb: id_amb } });
         
         if (existingAmbiente) {
             response(res, 500, 107, "Ambiente ya existe");
         } else {
             // Crear nuevo registro de ambiente
             const newAmbiente = await ambientes.create({
-                amb_id: amb_id,
+                id_amb: id_amb,
                 nom_amb: nom_amb,
                 cen_fk: cen_fk
             });
