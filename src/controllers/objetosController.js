@@ -1,5 +1,6 @@
 import objetos from "../models/objetosModel.js";
 import { response } from "../utils/response.js"; 
+import qrcode from 'qrcode'; // Importa el módulo qrcode
 export const GetAllObjetos = async (req, res, next) => {
     try {
         const objeto = await objetos.findAll();
@@ -24,33 +25,57 @@ export const GetObjetoById = async (req, res) => {
     }
 }
 
+
 export const createObjeto = async (req, res) => {
     try {
-        const {id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj  } = req.body;
-            // Crear nuevo registro de objeto
-            const newObjeto = await objetos.create({
-                id_cate:id_cate,
-                ser_obj:ser_obj,
-                id_amb:id_amb,
-                fech_adqui:fech_adqui,
-                est_obj:est_obj,
-                obser_obj:obser_obj,
-                tip_obj:tip_obj,
-                marc_obj:marc_obj,
-                val_obj:val_obj,
+        const { id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj } = req.body;
+
+        // Crear nuevo registro de objeto
+        const newObjeto = await objetos.create({
+            id_cate: id_cate,
+            ser_obj: ser_obj,
+            id_amb: id_amb,
+            fech_adqui: fech_adqui,
+            est_obj: est_obj,
+            obser_obj: obser_obj,
+            tip_obj: tip_obj,
+            marc_obj: marc_obj,
+            val_obj: val_obj,
+        });
+
+        if (newObjeto) {
+            // Generar código QR con los datos del objeto
+            const qrData = JSON.stringify({
+                id_obj: newObjeto.id, // Incluir otros datos del objeto si es necesario
+                ser_obj: newObjeto.ser_obj,
+                id_amb: newObjeto.id_amb,
+                fech_adqui: newObjeto.fech_adqui,
+                est_obj: newObjeto.est_obj,
+                obser_obj: newObjeto.obser_obj,
+                tip_obj: newObjeto.tip_obj,
+                marc_obj: newObjeto.marc_obj,
+                val_obj: newObjeto.val_obj,
             });
 
-            if (newObjeto) {
-                response(res, 200);
-            } else {
-                response(res, 500, 500, "Error a el crear");
-            }
-        
+            // Generar el código QR como una imagen (en este caso, como buffer)
+            const qrImageBuffer = await qrcode.toBuffer(qrData, { errorCorrectionLevel: 'H' });
+
+            // Guardar el código QR como atributo qrimagen del objeto en la base de datos
+            newObjeto.qrimagen = qrImageBuffer;
+
+            // Guardar los cambios en la base de datos
+            await newObjeto.save();
+
+            response(res, 200);
+        } else {
+            response(res, 500, 500, "Error al crear el objeto");
+        }
     } catch (err) {
-        response(res, 500, 500, "Algo salio mal");
         console.log(err);
+        response(res, 500, 500, "Algo salió mal");
     }
 };
+
 
 // Función para actualizar un registro de objeto cambiando su estado
 export const updateObjeto = async (req, res) => {
@@ -78,6 +103,6 @@ export const updateObjeto = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
-        response(res, 500, 500, "algo salio mal ");
-    }
+        response(res, 500, 500, "algo salio mal ");
+    }
 };

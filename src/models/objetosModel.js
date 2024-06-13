@@ -7,7 +7,6 @@ const objetos = connection.define('Objetos', {
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
-
     },
     id_cate:{
         type: DataTypes.INTEGER,
@@ -44,6 +43,10 @@ const objetos = connection.define('Objetos', {
     val_obj:{
         type: DataTypes.BIGINT,
         allowNull: false,
+    },
+    qrimagen: {
+        type: DataTypes.BLOB, // Tipo de dato para almacenar datos binarios
+        allowNull: true,
     }
 },{
     tableName: 'objetos',
@@ -59,4 +62,4 @@ connection.sync()
     console.error('Error al sincronizar los modelos con la base de datos:', err);
   });
 
-export default objetos;
+export default objetos;

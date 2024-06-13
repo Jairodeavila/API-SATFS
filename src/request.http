@@ -4,7 +4,7 @@ GET    http://localhost:3000/ambiente/all
 Content-Type: application/json
 
 ###
-GET    http://localhost:3000/ambiente/2
+GET    http://localhost:3000/ambiente/1
 Content-Type: application/json
 
 ###
@@ -19,11 +19,13 @@ Content-Type: application/json
 }
 
 ###
-put http://localhost:3000/ambiente/1/update
+put http://localhost:3000/ambiente/5/update
 Content-Type: application/json
 
 {   
-    "nom_amb": "Ambiente"
+    "id_amb": 5,
+    "nom_amb": "TEGNOLOGIASSS",
+    "cen_fk": 3
 }
 
 //CATEGORIAS

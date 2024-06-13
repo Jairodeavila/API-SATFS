@@ -10,7 +10,7 @@ router.get('/ambiente/:id', GetAmbientesById); // Cambiado a '/ambientes'
 // Ruta para obtener todos los ambientes
 router.post('/ambiente/:create', createAmbiente); // Cambiado a '/ambientes'
 
-router.put('/ambiente/:amb_id/update', updateAmbiente); 
+router.put('/ambiente/:id_amb/update', updateAmbiente); 
 
 export default router;
  

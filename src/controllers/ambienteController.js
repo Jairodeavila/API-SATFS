@@ -62,11 +62,11 @@ export const createAmbiente = async (req, res) => {
 // Función para actualizar un registro de ambiente cambiando su estado
 export const updateAmbiente = async (req, res) => {
     try {
-        const { amb_id } = req.params;
+        const { id_amb } = req.params;
         const { nom_amb, cen_fk } = req.body;
 
         // Verificar si existe el ambiente
-        const data = await ambientes.findByPk(amb_id);
+        const data = await ambientes.findByPk(id_amb);
 
         if (!data) {
             res.status(404).send("Ambiente no existe");
@@ -74,7 +74,7 @@ export const updateAmbiente = async (req, res) => {
             // Actualizar el estado del ambiente
             const responses = await ambientes.update(
                 { nom_amb: nom_amb, cen_fk: cen_fk },
-                { where: { amb_id: amb_id } }
+                { where: { id_amb: id_amb } }
             );
 
             if (responses) {
