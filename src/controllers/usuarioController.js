@@ -138,27 +138,26 @@ export const UserLoggingin = async (req, res) => {
 
         if (user) {
             user = user.dataValues;
-    
+
             // Verificar la contraseña
             const passEncripted = await bcrypt.compare(password, user.password); 
 
             if (passEncripted) {
-                const token = await generateAuthToken(email, password);
+                const token = await generateAuthToken(email);
                 console.log(token);
-                
-                 const decode =  jwt.decode(token,process.env.SECREDWORD)
 
+                const decode = jwt.decode(token, process.env.SECREDWORD);
                 console.log(decode);
-                
+
                 await Token.create({
-                    fec_caducidad:decode.exp,
-                    user_id_fk:user.num_doc,
-                    tipo_token:1,
+                    fec_caducidad: decode.exp,
+                    user_id_fk: user.num_doc,
+                    tipo_token: 1,
                     token: token
                 });
 
-                // Devolver el token en la respuesta
-                return res.status(200).json({ token: token });
+                // Devolver el token y la información del usuario en la respuesta
+                return res.status(200).json({ token: token, user: user });
             } else {
                 // Manejar la contraseña incorrecta
                 return res.status(401).json({ error: "Contraseña incorrecta" });
@@ -173,6 +172,7 @@ export const UserLoggingin = async (req, res) => {
         return res.status(500).json({ error: "Error interno del servidor" });
     }
 };
+
 
 export const generateAuthToken = async (email) => { 
     const secretKey = process.env.SECREDWORD; 
