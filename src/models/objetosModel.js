@@ -45,7 +45,7 @@ const objetos = connection.define('Objetos', {
         allowNull: false,
     },
     qrimagen: {
-        type: DataTypes.BLOB, // Tipo de dato para almacenar datos binarios
+        type: DataTypes.BLOB,
         allowNull: true,
     }
 },{
@@ -53,13 +53,4 @@ const objetos = connection.define('Objetos', {
     timestamps: false,
 });
 
-// Sincroniza los modelos con la base de datos
-connection.sync()
-  .then(() => {
-    console.log('¡Sincronización exitosa!');
-  })
-  .catch(err => {
-    console.error('Error al sincronizar los modelos con la base de datos:', err);
-  });
-
-export default objetos;
+export default objetos;

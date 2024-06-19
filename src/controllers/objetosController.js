@@ -26,6 +26,25 @@ export const GetObjetoById = async (req, res) => {
     }
 };
 
+export const GetObjetosByAmbienteId = async (req, res) => {
+    try {
+        const { ambienteId } = req.params;
+        const data = await objetos.findAll({
+            where: {
+                id_amb: ambienteId
+            }
+        });
+
+        if (data) {
+            res.status(200).json(data);
+        } else {
+            res.status(404).json({ message: 'No se encontraron objetos para este ambiente' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Algo salió mal' });
+    }
+};
+
 export const createObjeto = async (req, res) => {
     try {
         const { id_cate, ser_obj, id_amb, fech_adqui, est_obj, obser_obj, tip_obj, marc_obj, val_obj } = req.body;
